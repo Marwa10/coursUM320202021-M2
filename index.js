@@ -26,8 +26,8 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 
-app.get("/fetchair/shangai", cors(corsOptions), function(req, res){
-    let url = "http://api.waqi.info/feed/shanghai/?token=demo" ;
+app.get("/fetchair/tout", cors(corsOptions), function(req, res){
+    let url = "https://api.openaq.org/beta/averages" ;
     fetch(url)
     .then(res => res.json())
     .then(json => {
@@ -36,8 +36,8 @@ app.get("/fetchair/shangai", cors(corsOptions), function(req, res){
     });
 })
 
-app.get("/requestair/shangai", function(req, res){
-    let url = "https://api.waqi.info/feed/shanghai/?token=demo" ;
+app.get("/requestair/tout", function(req, res){
+    let url = "https://api.openaq.org/beta/averages" ;
     https.get(url, (resp) => {
         let data = '';
 
@@ -47,7 +47,7 @@ app.get("/requestair/shangai", function(req, res){
          });
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-            console.log("requestair", JSON.parse(data));
+            console.log("requestair/tout", JSON.parse(data));
             res.send("data requested look your console");
         });
 
