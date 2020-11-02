@@ -12,7 +12,7 @@ var https = require('https');
 var cors = require('cors');
 
 var corsOptions = {
-    origin: 'https://natoine.github.io',
+    origin: 'https://marwa10.github.io',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
