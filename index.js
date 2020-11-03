@@ -26,6 +26,12 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 
+
+
+
+
+
+// Fetch list of countries
 app.get("/data/pays", cors(corsOptions), function(req, res){
     let names = [] ;
     let pays = [] ;
@@ -46,26 +52,36 @@ app.get("/data/pays", cors(corsOptions), function(req, res){
     });
 })
 
-app.get("/requestair/pays", function(req, res){
-    let url = "https://api.openaq.org/v1/countries" ;
-    https.get(url, (resp) => {
-        let data = '';
 
-        // A chunk of data has been recieved.
-        resp.on('data', (chunk) => {
-            data += chunk;
-         });
-        // The whole response has been received. Print out the result.
-        resp.on('end', () => {
-            console.log("requestair/tout", JSON.parse(data));
-            res.send("data requested look your console");
-        });
 
-    }).on("error", (err) => {
-        console.log("Error: " + err.message);
-        res.send("nope request didnt work");
+// Fetch measurments of a specific country and date range
+app.get("/fetchair/tout", cors(corsOptions), function(req, res){
+    let country = "FR";
+    let d_from="2020-10-01";
+    let d_to ="2020-10-30";
+
+    let url = "https://api.openaq.org/v1/measurements?country=" +country +
+               "&date_from="+ d_from+ "&date_to="+ d_to +"&parameter[]=co&parameter[]=pm25";
+    fetch(url)
+    .then(res => res.json())
+    .then(json => {
+        console.log("fetchair", json);
+
+        res.format({
+            'text/html': function () {
+            res.send("data fetched look your console");
+            },
+            'application/json': function () {
+                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                res.set('Content-Type', 'application/json');
+                res.json(json);
+              }
+            })
     });
 })
+
+
+
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
