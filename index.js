@@ -6,20 +6,19 @@ var cors = require('cors');
 var ejs = require('ejs');
 
 const fs = require('fs')
-var ville = ""
-var cp = ""
+var Vpays = ""
+var VdateFrom = ""
 var bodyParser = require("body-parser");
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
 app.use(cors());
 
 
 // Page d'acceuil On revoit la page html --------------------------------
 app.get('/', function (req, res) {
         res.setHeader('Content-Type','text/html');
-        res.sendFile(__dirname + '/index.html');
+        res.sendFile(__dirname + '/docs/index.html');
 })
 
 app.get('/index', function(req,res) {
@@ -38,8 +37,8 @@ app.get('/index', function(req,res) {
 app.get('/form', function(req, res) {
     
     console.log("on est form")
-     ville = req.query.Vname
-     cp = req.query.cp
+     ville = req.query.Vpays
+     cp = req.query.VdateFrom
      
      res.redirect('/')
     
