@@ -40,7 +40,7 @@
             </div>
             <input class="datepicker" id="return" type="text" placeholder="30 Aug 2018" />
           </div>
-          
+
           <div class="input-field fifth-wrap">
             <button class="btn-search" type="button">SEARCH</button>
           </div>
@@ -60,7 +60,25 @@
         searchEnabled: false,
         itemSelectText: '',
       });
+      fetch("/pays")
+      .then(function(response) {
+        response.json()
+          .then(function(data) {
+            console.log(data);
 
+            var list = document.getElementById('liste_pays');
+
+            data.forEach(function(item){
+               var option = document.createElement('option');
+               option.value = item;
+               list.appendChild(option);
+            });
+
+
+
+
+          })
+        })
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

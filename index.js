@@ -60,6 +60,9 @@ async function initialize(){
     });
 })
 
+app.get("/pays", function(req, res) {
+  res.send(pays);
+})
 // API Covid
 app.get("/fetchcovid/tout", cors(corsOptions), function(req, res) {
   let date_begin = "2020-05-20";
