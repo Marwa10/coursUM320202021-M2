@@ -1,11 +1,31 @@
 'use strict'
 
+var fetch = require('node-fetch');
+
+let pays = [] ;
+async function initialize(){
+  let response = await fetch("https://api.openaq.org/v1/countries",{mode : "cors"});
+  let json = await response.json();
+  //console.log("resultat json ",json)
+  let results = json.results ;
+  results.forEach(function(result){
+    //console.log("resultat result",result.name)
+     if (result.name) pays.push(result.name);
+   });
+console.log(" initialize, liste des pays", pays);
+}
+
+
+initialize();
+console.log("apres initialize:" , pays);
+
+
 var express = require('express');
 var app = express();
 
 const port = process.env.PORT || 3000 ;
 
-var fetch = require('node-fetch');
+
 var https = require('https');
 
 
@@ -16,43 +36,14 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
+
 //serves static files
 app.use(express.static('docs'));
 
 
-
-// Page d'acceuil On revoit la page html --------------------------------
-app.get('/', function (req, res) {
-        res.setHeader('Content-Type','text/html');
-        res.sendFile(__dirname + '/docs/index.html');
-})
-
-app.get('/index', function(req,res) {
-   
-    fs.readFile('index.html', function(err, html) {
-    if(err){throw err;}
-    res.writeHead(200, {'Content-Type': 'text/html'})
-        res.write(html)
-        res.end()
-
-})
-})
-
-
-//ROUTES
-
-app.get("/:name", function(req, res){
-    res.send("hello : " + req.params.name );
-})
-
-
-
-
-
-
-// Fetch list of countries
-app.get("/data/pays", cors(corsOptions), function(req, res){
-    let names = [] ;
+/*Fetch list of countries
+//app.get("/data/pays", cors(corsOptions), function(req, res){
+    let names =;
     let pays = [] ;
     let url = "https://api.openaq.org/v1/countries" ;
     fetch(url)
@@ -62,14 +53,26 @@ app.get("/data/pays", cors(corsOptions), function(req, res){
     results.forEach(function(results){
       names.push(results.name);
     });
-
     pays = names.filter(function( element ) {
       return element !== undefined;
     });
+    document.getElementById('liste_pays').innerHTML = pays;
     console.log(pays);
     res.send("data fetched look your console");
     });
+*/
+
+
+
+// Page d'acceuil On revoit la page html --------------------------------
+app.get('/data', function (req, res) {
+        console.log("dans get", pays);
+        res.setHeader('Content-Type','text/html');
+        res.sendFile(__dirname + '/docs/index.html');
 })
+
+
+
 
 
 
