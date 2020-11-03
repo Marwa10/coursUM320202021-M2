@@ -80,6 +80,29 @@ app.get("/fetchair/tout", cors(corsOptions), function(req, res){
     });
 })
 
+// API Covid
+app.get("/fetchcovid/tout", cors(corsOptions), function(req, res) {
+  let date_begin = "2020-05-20";
+  let date_end = "2020-06-20";
+  let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/" + date_begin + "/" + date_end;
+  fetch(url)
+    .then(res => res.json())
+    .then(json => {
+      console.log("covid", json);
+      res.send("data fetched look your console");
+      res.format({
+            'text/html': function () {
+            res.send("data fetched look your console");
+            },
+            'application/json': function () {
+                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                res.set('Content-Type', 'application/json');
+                res.json(json);
+              }
+            })
+    });
+})
+
 
 
 
