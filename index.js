@@ -20,6 +20,25 @@ var corsOptions = {
 app.use(express.static('docs'));
 
 
+
+// Page d'acceuil On revoit la page html --------------------------------
+app.get('/', function (req, res) {
+        res.setHeader('Content-Type','text/html');
+        res.sendFile(__dirname + '/docs/index.html');
+})
+
+app.get('/index', function(req,res) {
+   
+    fs.readFile('index.html', function(err, html) {
+    if(err){throw err;}
+    res.writeHead(200, {'Content-Type': 'text/html'})
+        res.write(html)
+        res.end()
+
+})
+})
+
+
 //ROUTES
 
 app.get("/:name", function(req, res){
