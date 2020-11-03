@@ -1,34 +1,10 @@
 'use strict'
 
 var fetch = require('node-fetch');
-
-let pays = [] ;
-async function initialize(){
-  let response = await fetch("https://api.openaq.org/v1/countries",{mode : "cors"});
-  let json = await response.json();
-  //console.log("resultat json ",json)
-  let results = json.results ;
-  results.forEach(function(result){
-    //console.log("resultat result",result.name)
-     if (result.name) pays.push(result.name);
-   });
-console.log(" initialize, liste des pays", pays);
-}
-
-
-initialize();
-console.log("apres initialize:" , pays);
-
-
 var express = require('express');
 var app = express();
-
 const port = process.env.PORT || 3000 ;
-
-
 var https = require('https');
-
-
 var cors = require('cors');
 
 var corsOptions = {
@@ -36,48 +12,30 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
+let init = [] ;
+let pays = [] ;
+async function initialize(){
+  let url = "https://api.openaq.org/v1/countries";
+  init = await fetch(url).then(response => response.json());
 
-//serves static files
-app.use(express.static('docs'));
-
-
-/*Fetch list of countries
-//app.get("/data/pays", cors(corsOptions), function(req, res){
-    let names =;
-    let pays = [] ;
-    let url = "https://api.openaq.org/v1/countries" ;
-    fetch(url)
-    .then(res => res.json())
-    .then(json => {
-    let results = json.results ;
-    results.forEach(function(results){
-      names.push(results.name);
-    });
-    pays = names.filter(function( element ) {
-      return element !== undefined;
-    });
-    document.getElementById('liste_pays').innerHTML = pays;
-    console.log(pays);
-    res.send("data fetched look your console");
-    });
-*/
+  //console.log("liste: ", pays);
+  let results = init.results ;
+  //console.log("liste: ", results);
+  results.forEach(function(result){
+    //console.log("resultat result",result.name)
+     if (result.name) pays.push(result.name);
+   });
+   console.log("liste: ", pays);
 
 
+  console.log("now can start server");
 
-// Page d'acceuil On revoit la page html --------------------------------
-app.get('/data', function (req, res) {
-        console.log("dans get", pays);
-        res.setHeader('Content-Type','text/html');
-        res.sendFile(__dirname + '/docs/index.html');
-})
-
-
-
+  app.use(express.static('docs'));
 
 
 
 // Fetch measurments of a specific country and date range
-app.get("/fetchair/tout", cors(corsOptions), function(req, res){
+ app.get("/fetchair/tout", cors(corsOptions), function(req, res){
     let country = "FR";
     let d_from="2020-10-01";
     let d_to ="2020-10-30";
@@ -131,3 +89,35 @@ app.get("/fetchcovid/tout", cors(corsOptions), function(req, res) {
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
 });
+
+
+}
+
+//serves static files
+
+
+
+/*Fetch list of countries
+//app.get("/data/pays", cors(corsOptions), function(req, res){
+    let names =;
+    let pays = [] ;
+    let url = "https://api.openaq.org/v1/countries" ;
+    fetch(url)
+    .then(res => res.json())
+    .then(json => {
+    let results = json.results ;
+    results.forEach(function(results){
+      names.push(results.name);
+    });
+    pays = names.filter(function( element ) {
+      return element !== undefined;
+    });
+    document.getElementById('liste_pays').innerHTML = pays;
+    console.log(pays);
+    res.send("data fetched look your console");
+    });
+*/
+
+
+
+initialize();
