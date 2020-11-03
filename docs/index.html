@@ -61,5 +61,20 @@
         
           }
         }
+	
+function fetchehpadjson(route)
+{
+    fetch(route,
+                {
+                    method: 'GET',
+                    headers: { 'accept' : 'application/json'}
+                }
+            ).then(function(response){
+                response.json().then(function(data)
+                {
+                    document.getElementById("datacontent").innerHTML = JSON.stringify(data)
+                })
+            })
+}
 
 </script>
