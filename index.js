@@ -26,18 +26,28 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 
-app.get("/fetchair/tout", cors(corsOptions), function(req, res){
-    let url = "https://api.openaq.org/beta/averages" ;
+app.get("/data/pays", cors(corsOptions), function(req, res){
+    let names = [] ;
+    let pays = [] ;
+    let url = "https://api.openaq.org/v1/countries" ;
     fetch(url)
     .then(res => res.json())
     .then(json => {
-        console.log("fetchair", json);
-        res.send("data fetched look your console");
+    let results = json.results ;
+    results.forEach(function(results){
+      names.push(results.name);
+    });
+
+    pays = names.filter(function( element ) {
+      return element !== undefined;
+    });
+    console.log(pays);
+    res.send("data fetched look your console");
     });
 })
 
-app.get("/requestair/tout", function(req, res){
-    let url = "https://api.openaq.org/beta/averages" ;
+app.get("/requestair/pays", function(req, res){
+    let url = "https://api.openaq.org/v1/countries" ;
     https.get(url, (resp) => {
         let data = '';
 
