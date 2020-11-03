@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ProjetoData</title>
+        <meta descr="">
+    </head>
+    
+    <body>
+        <h1>Qualite d air dans un Pays</h1>
+
+        <Center><h3>Trouvez la qualite d'air dans un pays : </h3></Center>
+        <form name="forme"  method="get" action="/form" onsubmit="return validateForm()"></form>
+
+            <label>Pays :</label>
+                <select id="Vpays" name="Vpays" >
+                <option value="FR" selected="selected">FRANCE</option>
+                <option value="ES">ESPAGNE</option>
+                </select><br><br>
+
+ 
+                <label>Date </label>
+                <input type="date" id="VdateFrom" required />
+                <input type="date" id="VdateTo" required /><br><br>
+                <div id="load"></div>
+
+                <input type="submit" class="btn waves-effect waves-light" value="submit" >
+				<INPUT TYPE="reset" class="btn waves-effect waves-light" VALUE=" Annuler " id="reset">
+
+        </form>
+
+        <CENTER>    
+            <button type="button" id="jsonbtn" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>JSON</button>
+            <button type="button" id="rdfbtn" class="waves-effect waves-light btn"><i class="material-icons right">cloud_download</i>RDF</button>
+        </CENTER>
+        
+        
+                <h5>Affichage resultats :</h5>
+    </body>
+</html>
+
+<script>
+
+        function validateForm() {
+          var x = document.forms["forme"]["Vpays"].value;
+          if (x == "") {
+            alert("Veuillez renseigner votre pays SVP");
+            return false;
+          }
+          var y = document.forms["forme"]["VdateFrom"].value;
+          if (y == "") {
+            alert("Veuillez renseigner la date de debut SVP");
+            return false;
+          }else{
+            var target = document.getElementById('load');
+            target.className = "loader"
+            
+        
+          }
+        }
+
+</script>
