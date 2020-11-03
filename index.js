@@ -61,10 +61,10 @@ async function initialize(){
 })
 
 // API Covid
-app.get("/fetchcovid/tout", cors(corsOptions), function(req, res) {
+app.get("/fetchcovid/action_begin", cors(corsOptions), function(req, res) {
   let date_begin = "2020-05-20";
-  let date_end = "2020-06-20";
-  let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/" + date_begin + "/" + date_end;
+  let pays = "ABW";
+  let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+pays+"/"+date_begin;
   fetch(url)
     .then(res => res.json())
     .then(json => {
@@ -83,7 +83,27 @@ app.get("/fetchcovid/tout", cors(corsOptions), function(req, res) {
     });
 })
 
-
+app.get("/fetchcovid/action_fin", cors(corsOptions), function(req, res) {
+  let date_end = "2020-06-20";
+  let pays = "ABW";
+  let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+pays+"/"+date_end;
+  fetch(url)
+    .then(res => res.json())
+    .then(json => {
+      console.log("covid", json);
+      res.send("data fetched look your console");
+      res.format({
+            'text/html': function () {
+            res.send("data fetched look your console");
+            },
+            'application/json': function () {
+                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                res.set('Content-Type', 'application/json');
+                res.json(json);
+              }
+            })
+    });
+})
 
 
 app.listen(port, function () {
