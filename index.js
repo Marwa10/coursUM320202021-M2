@@ -20,6 +20,49 @@ var corsOptions = {
 //serves static files
 app.use(express.static('docs'));
 
+///////////////////////////////////////
+
+var Vpays = ""
+var VdateForm = ""
+
+
+
+
+// Page d'acceuil On revoit la page html --------------------------------
+app.get('/', function (req, res) {
+        res.setHeader('Content-Type','text/html');
+        res.sendFile(__dirname + '/docs/index.html');
+})
+
+app.get('/index', function(req,res) {
+   
+    fs.readFile('index.html', function(err, html) {
+    if(err){throw err;}
+    res.writeHead(200, {'Content-Type': 'text/html'})
+        res.write(html)
+        res.end()
+
+})
+})
+
+
+// Ici on recupere les données du formulaire qui seront enreigstrées dans des variables globales ---------
+app.get('/form', function(req, res) {
+    
+    console.log("on est form")
+     Vpays = req.query.Vpays
+     VdateForm = req.query.VdateForm
+     
+     res.redirect('/')
+    
+})
+
+////////////////////////////////////////
+
+
+
+
+
 
 //ROUTES
 
