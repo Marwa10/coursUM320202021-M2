@@ -29,12 +29,11 @@ function fetchAirInfo(){
 
 //Données covid date début
 
-function fetActionEnd(){
+function fetchActionBegin(){
   let country =  document.getElementById('search').value;
   let date_from = document.getElementById('depart').value;
-  let date_to = document.getElementById('return').value;
 
-  fetch("/fetchcovid/action_fin" + country +date_from)
+  fetch("/fetchcovid/action_begin?date_from="+ date_from + "&pays=" + country)
    .then(function(response) {
      response.json()
        .then(function(data) {
@@ -45,12 +44,11 @@ function fetActionEnd(){
 }
 
 // Donnée covid date de fin
-function fetActionEnd(){
+function fetchActionEnd(){
   let country =  document.getElementById('search').value;
-  let date_from = document.getElementById('depart').value;
   let date_to = document.getElementById('return').value;
 
-  fetch("/fetchcovid/action_fin" + country +date_from)
+  fetch("/fetchcovid/action_begin?date_from="+ date_to+ "&pays=" + country )
    .then(function(response) {
      response.json()
        .then(function(data) {
