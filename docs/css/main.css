@@ -36,6 +36,17 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+h5 {
+  font-size: 1em;
+  color : white;
+  margin: 0.67em 0;
+}
+#datacontent 
+     { 
+     margin:0 auto; 
+     width: 75%; 
+     color: white;
+     }
 
 /* Grouping content
    ========================================================================== */
