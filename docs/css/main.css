@@ -41,12 +41,10 @@ h5 {
   color : white;
   margin: 0.67em 0;
 }
-#datacontent 
-     { 
-     margin:0 auto; 
-     width: 75%; 
-     color: white;
-     }
+#datacontent{
+  word-wrap: break-word;
+  color : "black";
+}
 
 /* Grouping content
    ========================================================================== */
@@ -1190,7 +1188,7 @@ legend {
   outline: 0;
 }
 
-.s002 form #datadisplay h4 {
+#datadisplay h4{
   display:none;
 }
 
@@ -1601,6 +1599,7 @@ span.flatpickr-weekday {
 
 .s002 form #datadisplay {
   background: rgba(255, 255, 255, 0.7);
+  color : #000000;
   padding: 16px;
   display: -ms-flexbox;
   display: flex;
