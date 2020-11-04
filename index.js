@@ -77,8 +77,8 @@ app.get("/pays", function(req, res) {
 })
 // API Covid
 app.get("/fetchcovid/action_begin", cors(corsOptions), function(req, res) {
-  let date_begin = "2020-05-20";
-  let pays = "ABW";
+  var date_begin = req.query["date_from"];
+  var pays = req.query["pays"];
   let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+pays+"/"+date_begin;
   fetch(url)
     .then(res => res.json())
