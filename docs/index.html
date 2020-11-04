@@ -45,11 +45,22 @@
           <div class="input-field fifth-wrap">
             <button id = "btn-search1" class="btn-search" type="button" onclick="return isEmpty()">SEARCH</button>
           </div>
-          <CENTER>
-              <button type="button" id="jsonbtn" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>JSON</button><br></br>
-              <button type="button" id="rdfbtn" class="waves-effect waves-light btn"><i class="material-icons right">cloud_download</i>RDF</button>
-          </CENTER>
         </div>
+
+        <div class="inner-form">
+        <CENTER>
+            <button type="button" id="jsonbtn" >Afficher les résultats en JSON</button>
+            <button type="button" id="rdfbtn" >Afficher les résultats en RDF</button>
+        </CENTER>
+        </div>
+
+        <div id = "datadisplay">
+          <h4>Résultat :</h4>
+          <div id="response">
+               <div id=datacontent></div>
+          </div>
+        </div>
+
       </form>
     </div>
     <script src="js/extention/choices.js"></script>
@@ -92,16 +103,11 @@
             }
          }
     </script>
-        <h5>Affichage résultats :</h5>
 
-       
 
-    <div id="response">
-         <div id=datacontent></div>
-    </div>
     <script type="text/javascript" src="js/materialize.min.js"></script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-  
+
     <script>
 
 function fetchehpadjson(route)
@@ -124,6 +130,20 @@ jsonbtn.onclick = function()
 {
     console.log("clicked on json")
     fetchehpadjson('/pays')
+    var x = document.getElementById("datadisplay");
+    var col = document.getElementById("jsonbtn");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      col.style.color = "white";
+      col.style.background = "black";
+    } else {
+      x.style.display = "none";
+      col.style.color = "black";
+      col.style.background = "grey";
+
+    }
+
 }
+
   </script>
 </html>
