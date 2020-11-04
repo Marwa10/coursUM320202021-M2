@@ -6,6 +6,8 @@ var app = express();
 const port = process.env.PORT || 3000 ;
 var https = require('https');
 var cors = require('cors');
+var countries = require("i18n-iso-countries");
+
 
 var corsOptions = {
     origin: 'https://marwa10.github.io',
@@ -23,9 +25,9 @@ async function initialize(){
   //console.log("liste: ", results);
   results.forEach(function(result){
     //console.log("resultat result",result.name)
-     if (result.name) pays.push(result.name);
+     if (result.name) pays.push(countries.getAlpha2Code(result.name, "en"));
    });
-   console.log("liste: ", pays);
+   //console.log("liste: ", pays);
 
 
   console.log("now can start server");
@@ -36,17 +38,26 @@ async function initialize(){
 
 // Fetch measurments of a specific country and date range
  app.get("/fetchair/tout", cors(corsOptions), function(req, res){
+   /*
     let country = "FR";
     let d_from="2020-10-01";
     let d_to ="2020-10-30";
+    */
 
-    let url = "https://api.openaq.org/v1/measurements?country=" +country +
+    let country_name = req.query('country');
+    //country_name = countries.getAlpha2Code(country_name, "en")
+    let d_from = req.query('date_from');
+    let d_to = req.query('date_to');
+
+    let url = "https://api.openaq.org/v1/measurements?country=" +country_name +
                "&date_from="+ d_from+ "&date_to="+ d_to +"&parameter[]=co&parameter[]=pm25";
+    console.log(url);
+
+    //let url = "https://api.openaq.org/v1/measurements";
     fetch(url)
     .then(res => res.json())
-    .then(json => {
-        console.log("fetchair", json);
-
+    .then(country_air => {
+        console.log("fetchair", country_air);
         res.format({
             'text/html': function () {
             res.send("data fetched look your console");
@@ -54,9 +65,9 @@ async function initialize(){
             'application/json': function () {
                 res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
-                res.json(json);
+                res.json(country_air);
               }
-            })
+            });
     });
 })
 
