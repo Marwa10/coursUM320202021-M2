@@ -92,5 +92,38 @@
             }
          }
     </script>
+        <h5>Affichage résultats :</h5>
+
+       
+
+    <div id="response">
+         <div id=datacontent></div>
+    </div>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  
+    <script>
+
+function fetchehpadjson(route)
+{
+    fetch(route,
+                {
+                    method: 'GET',
+                    headers: { 'accept' : 'application/json'}
+                }
+            ).then(function(response){
+                response.json().then(function(data)
+                {
+                    document.getElementById("datacontent").innerHTML = JSON.stringify(data)
+                })
+            })
+}
+jsonbtn = document.getElementById("jsonbtn")
+
+jsonbtn.onclick = function()
+{
+    console.log("clicked on json")
+    fetchehpadjson('/pays')
+}
+  </script>
 </html>
