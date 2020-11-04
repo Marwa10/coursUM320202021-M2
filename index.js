@@ -44,7 +44,6 @@ async function initialize(){
     let d_to ="2020-10-30";
     +"&parameter[]=co&parameter[]=pm25"
     */
-
     let country_name = req.query['country'];
     //country_name = countries.getAlpha2Code(country_name, "en")
     let d_from = req.query['date_from'];
@@ -56,9 +55,15 @@ async function initialize(){
 
     //let url = "https://api.openaq.org/v1/measurements";
     fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if(res.ok){
+        res.json();
+        console.log("success", res.json());
+      }else {
+        console.log('erreur de response', res.statusText)}
+      } )
     .then(country_air => {
-        console.log("fetchair", country_air);
+        //console.log("fetchair", country_air);
         res.format({
             'text/html': function () {
             res.send("data fetched look your console");

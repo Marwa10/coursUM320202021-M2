@@ -1,4 +1,7 @@
 'use strict'
+
+
+//let token= "c649537876c0cf6eac009978cd1c83da68a1b38c";
   window.addEventListener("load", initialize);
 
   function initialize() {
@@ -17,12 +20,22 @@ function fetchAirInfo(){
 
   console.log(date_to);
 
-  fetch("/fetchair/tout" + "?country="+ country + "&date_from=" +date_from + "&date_to=" + date_to)
-   .then(function(response) {
+  fetch("/fetchair/tout" + "?country="+ country + "&date_from=" +date_from + "&date_to=" + date_to ,{
+          headers : {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'}
+                  } )
+  .then(function (response){
+    console.log(response.json());
+
+  })
+
+   /*.then(function(response) {
      response.json()
        .then(function(data) {
+         console.log("c bon");
          console.log(data); })
 
-})
+}) */
 
 }
