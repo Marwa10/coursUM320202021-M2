@@ -42,11 +42,11 @@
           </div>
 
           <div class="input-field fifth-wrap">
-            <button class="btn-search" type="button">SEARCH</button>
+            <button class="btn-search" type="button" onclick="return isEmpty()">SEARCH</button>
           </div>
           <CENTER>    
-              <button type="button" id="jsonbtn" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>JSON</button>
-              <button type="button" id="rdfbtn" class="waves-effect waves-light btn"><i class="material-icons right">cloud_download</i>RDF</button>
+              <button type="button" id="jsonbtn" class="input-field fifth-wrap"><i class="material-icons left">cloud_download</i>JSON</button><br></br>
+              <button type="button" id="rdfbtn" class="input-field fifth-wrap"><i class="material-icons right">cloud_download</i>RDF</button>
           </CENTER>
         </div>
       </form>
@@ -77,19 +77,57 @@
                option.value = item;
                list.appendChild(option);
             });
-
-
-
-
           })
         })
-	      function isEmpty(){
-             var str = document.forms['myForm'].search.value;
-             if( !str.replace(/\s+/, '').length ) {
-                  alert( "Veuillez renseigner le champ pays SVP !" );
-                  return false;
-             }
+        
+     	  function isEmpty(){
+          var str = document.forms['myForm'].search.value;
+          if( !str.replace(/\s+/, '').length ) {
+            alert( "Veuillez renseigner le champ pays SVP !" );
+            return false;
+            }
          }
+
     </script>
+    <h3>Affichage résultats :</h3>
+
+       
+
+    <div id="response">
+         <div id=datacontent></div>
+    </div>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+  <script>
+             function getCode(){
+	          console.log("nous sommes dans getcode");
+            var target = document.getElementById('search');
+            target.innerText = "Vous pouvez à présent télécharger les résultats en format csv"
+
+}
+
+function fetchehpadjson(route)
+{
+    fetch(route,
+                {
+                    method: 'GET',
+                    headers: { 'accept' : 'application/json'}
+                }
+            ).then(function(response){
+                response.json().then(function(data)
+                {
+                    document.getElementById("datacontent").innerHTML = JSON.stringify(data)
+                })
+            })
+}
+jsonbtn = document.getElementById("jsonbtn")
+
+jsonbtn.onclick = function()
+{
+    console.log("clicked on json")
+    fetchehpadjson('/pays')
+}
+  </script>
 </html>
