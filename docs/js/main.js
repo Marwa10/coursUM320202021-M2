@@ -42,10 +42,10 @@ function fetchAirInfo(){
 }
 
 //Données covid date début
-<<<<<<< HEAD
+
 /*
 function fetActionEnd(){
-=======
+
 
 function fetchActionBegin(){
 >>>>>>> bc75353ab43d8c71674c2a50df53f12c9fc58a16
