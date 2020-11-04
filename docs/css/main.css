@@ -36,6 +36,15 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+h5 {
+  font-size: 1em;
+  color : white;
+  margin: 0.67em 0;
+}
+#datacontent{
+  word-wrap: break-word;
+  color : "black";
+}
 
 /* Grouping content
    ========================================================================== */
@@ -1179,6 +1188,10 @@ legend {
   outline: 0;
 }
 
+#datadisplay h4{
+  display:none;
+}
+
 .flatpickr-current-month input.cur-year[disabled], .flatpickr-current-month input.cur-year[disabled]:hover {
   font-size: 100%;
   color: rgba(0, 0, 0, 0.5);
@@ -1553,6 +1566,51 @@ span.flatpickr-weekday {
       align-items: center;
 }
 
+.s002 form .inner-form #jsonbtn {
+  border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    text-shadow: 1px 1px 1px "#000";
+    border-radius: 10px;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+}
+
+.s002 form .inner-form #rdfbtn {
+  border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: "#fff";
+    text-shadow: 1px 1px 1px "#000";
+    border-radius: 10px;
+    background-color: "grey";
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+}
+
+
+.s002 form #datadisplay {
+  background: rgba(255, 255, 255, 0.7);
+  color : #000000;
+  padding: 16px;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+
 .s002 form .inner-form .input-field {
   position: relative;
   border-right: 1px solid #ddd;
@@ -1790,4 +1848,3 @@ span.flatpickr-weekday {
     margin-bottom: 0;
   }
 }
-
