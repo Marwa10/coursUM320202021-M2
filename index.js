@@ -16,6 +16,7 @@ var corsOptions = {
 
 let init = [] ;
 let pays = [] ;
+let pays3 = [];
 async function initialize(){
   let url = "https://api.openaq.org/v1/countries";
   init = await fetch(url).then(response => response.json());
@@ -26,6 +27,7 @@ async function initialize(){
   results.forEach(function(result){
     //console.log("resultat result",result.name)
      if (result.name) pays.push(countries.getAlpha2Code(result.name, "en"));
+     if (result.name) pays3.push(countries.getAlpha3Code(result.name, "en"));
    });
    //console.log("liste: ", pays);
 
@@ -105,7 +107,15 @@ app.get("/pays", function(req, res) {
 // API Covid
 app.get("/fetchcovid/action_begin", cors(corsOptions), function(req, res) {
   var date_begin = req.query["date_from"];
-  var pays = req.query["pays"];
+  var test = req.query["pays"];
+  let pays;
+  for (var i = 0; i<pays3.length; i++){
+    if(pays3[i]){
+      if(pays3[i].substring(0,2)==test){
+        pays = pays3[i]
+    }
+  }
+  }
   let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+pays+"/"+date_begin;
   fetch(url)
     .then(res => res.json())
