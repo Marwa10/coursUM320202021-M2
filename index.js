@@ -42,15 +42,16 @@ async function initialize(){
     let country = "FR";
     let d_from="2020-10-01";
     let d_to ="2020-10-30";
+    +"&parameter[]=co&parameter[]=pm25"
     */
 
-    let country_name = req.query('country');
+    let country_name = req.query['country'];
     //country_name = countries.getAlpha2Code(country_name, "en")
-    let d_from = req.query('date_from');
-    let d_to = req.query('date_to');
+    let d_from = req.query['date_from'];
+    let d_to = req.query['date_to'];
 
     let url = "https://api.openaq.org/v1/measurements?country=" +country_name +
-               "&date_from="+ d_from+ "&date_to="+ d_to +"&parameter[]=co&parameter[]=pm25";
+               "&date_from="+ d_from+ "&date_to="+ d_to;
     console.log(url);
 
     //let url = "https://api.openaq.org/v1/measurements";

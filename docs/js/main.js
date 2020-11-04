@@ -17,7 +17,7 @@ function fetchAirInfo(){
 
   console.log(date_to);
 
-  fetch("/fetchair/tout" +  "?country="+ country + "&date_from=" +date_from + "&date_to=" + date_to)
+  fetch("/fetchair/tout" + "?country="+ country + "&date_from=" +date_from + "&date_to=" + date_to)
    .then(function(response) {
      response.json()
        .then(function(data) {
