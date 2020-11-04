@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="s002">
-      <form>
+      <form name='myForm'>
         <fieldset>
           <legend>Air quality and lockdowns</legend>
         </fieldset>
@@ -22,7 +22,7 @@
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
               </svg>
             </div>
-            <input id="search"  placeholder="What are you looking for?" name = "pays"  list="liste_pays" />
+            <input id="search" name="search" placeholder="What are you looking for?"  list="liste_pays" />
             <datalist id="liste_pays"></datalist>
           </div>
           <div class="input-field second-wrap">
@@ -43,7 +43,7 @@
           </div>
 
           <div class="input-field fifth-wrap">
-            <button  id = "btn-search1" class="btn-search" type="button">SEARCH</button>
+            <button id = "btn-search1" class="btn-search" type="button" onclick="return isEmpty()">SEARCH</button>
           </div>
           <CENTER>
               <button type="button" id="jsonbtn" class="waves-effect waves-light btn"><i class="material-icons left">cloud_download</i>JSON</button>
@@ -84,6 +84,13 @@
 
           })
         })
+     	  function isEmpty(){
+          var str = document.forms['myForm'].search.value;
+          if( !str.replace(/\s+/, '').length ) {
+            alert( "Veuillez renseigner le champ pays SVP !" );
+            return false;
+            }
+         }
     </script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
