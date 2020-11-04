@@ -42,7 +42,7 @@ function fetchAirInfo(){
 }
 
 //Données covid date début
-
+/*
 function fetActionEnd(){
   let country =  document.getElementById('search').value;
   let date_from = document.getElementById('depart').value;
@@ -71,3 +71,4 @@ function fetActionEnd(){
          console.log(data); })
 
 })
+*/
