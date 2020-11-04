@@ -83,7 +83,6 @@ app.get("/fetchcovid/action_begin", cors(corsOptions), function(req, res) {
     .then(res => res.json())
     .then(json => {
       console.log("covid", json);
-      res.send("data fetched look your console");
       res.format({
             'text/html': function () {
             res.send("data fetched look your console");
@@ -105,7 +104,6 @@ app.get("/fetchcovid/action_fin", cors(corsOptions), function(req, res) {
     .then(res => res.json())
     .then(json => {
       console.log("covid", json);
-      res.send("data fetched look your console");
       res.format({
             'text/html': function () {
             res.send("data fetched look your console");
