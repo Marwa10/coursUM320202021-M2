@@ -37,33 +37,50 @@ async function initialize(){
 
 
 // Fetch measurments of a specific country and date range
- app.get("/fetchair/tout", cors(corsOptions), function(req, res){
-   /*
-    let country = "FR";
+ app.get("/airquality/:country/:date_from/:date_to",
+ //app.get("/airquality/country/",
+       cors(corsOptions), function(req, res){
+    /*
+    let country_name = "FR";
     let d_from="2020-10-01";
-    let d_to ="2020-10-30";
-    +"&parameter[]=co&parameter[]=pm25"
-    */
-    let country_name = req.query['country'];
+    let d_to ="2020-10-30"; */
+
+    let country_name = req.param("country");
+    console.log(country_name);
     //country_name = countries.getAlpha2Code(country_name, "en")
-    let d_from = req.query['date_from'];
-    let d_to = req.query['date_to'];
+    let d_from = req.param("date_from");
+    let d_to = req.param("date_to");
 
     let url = "https://api.openaq.org/v1/measurements?country=" +country_name +
-               "&date_from="+ d_from+ "&date_to="+ d_to;
+               "&date_from="+ d_from+ "&date_to="+ d_to + "&limit=10";
     console.log(url);
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        console.log("fetchair", json);
+        res.format({
+              //'text/html': function () {
+              //res.send("data fetched look your console");
+              //},
+              'application/json': function () {
+                  res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                  res.set('Content-Type', 'application/json');
+                  res.json(json);
+                }
+              })
+      });
 
     //let url = "https://api.openaq.org/v1/measurements";
+    /*
     fetch(url)
     .then(res => {
       if(res.ok){
         res.json();
-        console.log("success", res.json());
+        console.log("success");
       }else {
         console.log('erreur de response', res.statusText)}
-      } )
-    .then(country_air => {
-        //console.log("fetchair", country_air);
+      })
+    .then(json => {
         res.format({
             'text/html': function () {
             res.send("data fetched look your console");
@@ -71,11 +88,16 @@ async function initialize(){
             'application/json': function () {
                 res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
-                res.json(country_air);
+                res.json(json);
               }
             });
-    });
+            console.log("fetchair", json);
+
+    }); */
 })
+
+
+
 
 app.get("/pays", function(req, res) {
   res.send(pays);
@@ -130,32 +152,6 @@ app.listen(port, function () {
 
 
 }
-
-//serves static files
-
-
-
-/*Fetch list of countries
-//app.get("/data/pays", cors(corsOptions), function(req, res){
-    let names =;
-    let pays = [] ;
-    let url = "https://api.openaq.org/v1/countries" ;
-    fetch(url)
-    .then(res => res.json())
-    .then(json => {
-    let results = json.results ;
-    results.forEach(function(results){
-      names.push(results.name);
-    });
-    pays = names.filter(function( element ) {
-      return element !== undefined;
-    });
-    document.getElementById('liste_pays').innerHTML = pays;
-    console.log(pays);
-    res.send("data fetched look your console");
-    });
-*/
-
 
 
 initialize();

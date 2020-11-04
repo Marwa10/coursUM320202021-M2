@@ -12,23 +12,20 @@
 
 
 function fetchAirInfo(){
-  let country =  document.getElementById('search').value;
-  console.log(country);
-  let date_from = document.getElementById('depart').value;
-  console.log(date_from);
-  let date_to = document.getElementById('return').value;
+  let sent_country =  document.getElementById('search').value;
+  console.log(sent_country);
+  let sent_date_from = document.getElementById('depart').value;
+  console.log(sent_date_from);
+  let sent_date_to = document.getElementById('return').value;
+  console.log(sent_date_to);
 
-  console.log(date_to);
+  fetch("/airquality/"+ sent_country + "/" +sent_date_from + "/" + sent_date_to)
+  .then(res => res.json())          // convert to plain text
+  .then(json => console.log(json.results))
 
-  fetch("/fetchair/tout" + "?country="+ country + "&date_from=" +date_from + "&date_to=" + date_to ,{
-          headers : {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'}
-                  } )
-  .then(function (response){
-    console.log(response.json());
+   //fetch("/airquality/country")
 
-  })
+
 
    /*.then(function(response) {
      response.json()
@@ -37,5 +34,9 @@ function fetchAirInfo(){
          console.log(data); })
 
 }) */
+
+
+// fetch covid info:
+
 
 }
