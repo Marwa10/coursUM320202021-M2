@@ -1,0 +1,56 @@
+<!-- Table covid_air_quality -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#covid_air_quality">
+  <rdfs:label xml:lang="en">covid Air quality</rdfs:label>
+  <rdfs:comment xml:lang="fr">Un concept pour représenter la qualité de l'aire
+    par rapport au mesures prise par un pays et les cas covid</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Pays</rdfs:label>
+  <rdfs:comment xml:lang="fr">Le pays qu'on veut voir les infos</rdfs:comment>
+  <rdfs:label xlm:lang = "en">date_start</rdfs:label>
+  <rdfs:comment xml:lang="fr">La date de début </rdfs:comment>
+  <rdfs:label xlm:lang = "en">date_end</rdfs:label>
+  <rdfs:comment xml:lang="fr">La date de fin </rdfs:comment>
+<rdfs:Class/>
+
+<!-- Table Air quality measure -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+  <rdfs:label xml:lang="en">Date</rdfs:label>
+  <rdfs:comment xml:lang="fr">La date qu'on a mesuré la qualité de l'aire</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Valu</rdfs:label>
+  <rdfs:comment xml:lang="fr">La valeur de la qualité de l'aire</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Location</rdfs:label>
+  <rdfs:comment xml:lang="fr">to change </rdfs:comment>
+  <rdfs:label xlm:lang = "en">Parameter</rdfs:label>
+  <rdfs:comment xml:lang="fr">Le paramètre calculé</rdfs:comment>
+  <rdfs:label xlm:lang = "en">City</rdfs:label>
+  <rdfs:comment xml:lang="fr">Une ville du pays </rdfs:comment>
+<rdfs:Class/>
+
+<!-- Table stringency -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+  <rdfs:label xml:lang="en">Confirmed</rdfs:label>
+  <rdfs:comment xml:lang="fr">Le nombre de cas confirmé</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Death</rdfs:label>
+  <rdfs:comment xml:lang="fr">Le nombre de déces</rdfs:comment>
+  <rdfs:label xlm:lang = "en">date_value</rdfs:label>
+  <rdfs:comment xml:lang="fr">La date </rdfs:comment>
+  <rdfs:label xlm:lang = "en">stringency</rdfs:label>
+  <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
+<rdfs:Class/>
+
+<!-- Table actions -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+  <rdfs:label xml:lang="en">Policy_type_display</rdfs:label>
+  <rdfs:comment xml:lang="fr">Description de Policy_value</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Policy_value</rdfs:label>
+  <rdfs:comment xml:lang="fr">L'état de la police</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Policy_value_actual</rdfs:label>
+  <rdfs:comment xml:lang="fr"></rdfs:comment>
+  <rdfs:label xlm:lang = "en">Flagged</rdfs:label>
+  <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Policy_value_display_field</rdfs:label>
+  <rdfs:comment xml:lang="fr">Niveau de rigeur de la police</rdfs:comment>
+<rdfs:Class/>
