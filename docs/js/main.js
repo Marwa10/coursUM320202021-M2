@@ -70,3 +70,35 @@ function fetchActionEnd(){
 
 })
 */
+
+fetch("/pays")
+.then(function(response) {
+  response.json()
+    .then(function(data) {
+      //console.log(data);
+
+      var list = document.getElementById('liste_pays');
+
+      data.forEach(function(item){
+         var option = document.createElement('option');
+         option.value = item;
+         list.appendChild(option);
+      });
+
+    })
+  })
+
+
+  const choices = new Choices('[data-trigger]',
+  {
+    searchEnabled: false,
+    itemSelectText: '',
+  });
+
+    function isEmpty(){
+      var str = document.forms['myForm'].search.value;
+      if( !str.replace(/\s+/, '').length ) {
+        alert( "Veuillez renseigner le champ pays SVP !" );
+        return false;
+        }
+     }
