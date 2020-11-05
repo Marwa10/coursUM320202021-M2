@@ -26,7 +26,7 @@ async function initialize(){
   //console.log("liste: ", results);
   results.forEach(function(result){
     //console.log("resultat result",result.name)
-     if (result.name) pays.push(countries.getAlpha2Code(result.name, "en"));
+     if (result.name) pays.push(result.name);
      if (result.name) pays3.push(countries.getAlpha3Code(result.name, "en"));
    });
    //console.log("liste: ", pays);
@@ -47,7 +47,7 @@ async function initialize(){
     let d_from="2020-10-01";
     let d_to ="2020-10-30"; */
 
-    let country_name = req.param("country");
+    let country_name =  countries.getAlpha2Code(req.param("country"));
     console.log(country_name);
     //country_name = countries.getAlpha2Code(country_name, "en")
     let d_from = req.param("date_from");
@@ -109,7 +109,7 @@ app.get("/pays", function(req, res) {
 
 // API Covid
 app.get("/covid/:country/:start", cors(corsOptions), function(req, res) {
-  let country_name = countries.alpha2ToAlpha3(req.param("country"));
+  let country_name =  countries.getAlpha3Code(req.param("country"));
   let date_start = req.param("start");
   console.log(country_name);
 
