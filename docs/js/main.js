@@ -29,6 +29,10 @@ function fetchAirInfo(){
   .then(res => res.json())          // convert to plain text
   .then(json => console.log("covid info:",json))
 
+  fetch("/covidinfo/enddate/" + sent_country + "/"+ sent_date_to)
+  .then(res => res.json())          // convert to plain text
+  .then(json => console.log("covid info end date :",json))
+
 
    //fetch("/airquality/country")
 
