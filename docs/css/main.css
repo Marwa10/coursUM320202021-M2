@@ -32,6 +32,13 @@ section {
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
+
+CENTER {
+  margin: 0 auto;
+  width: 656px;
+  text-align: center;
+}
+
 h1 {
   font-size: 2em;
   margin: 0.67em 0;

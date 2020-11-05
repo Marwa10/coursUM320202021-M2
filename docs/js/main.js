@@ -36,6 +36,7 @@ function fetchAirInfo(){
 
   document.getElementById("datacontent1").style.color = "black";
   document.getElementById("datacontent2").style.color = "black";
+  document.getElementById("datacontent3").style.color = "black";
   fetch("/airquality/"+ sent_country + "/" +sent_date_from + "/" + sent_date_to)
   .then(res => res.json())          // convert to plain text
   .then(json => document.getElementById("datacontent1").textContent = JSON.stringify(json.results,undefined, 2))
@@ -48,7 +49,7 @@ function fetchAirInfo(){
 
   fetch("/covidinfo/enddate/" + sent_country + "/"+ sent_date_to)
   .then(res => res.json())          // convert to plain text
-  .then(json => console.log("covid info end date :",json))
+  .then(json => document.getElementById("datacontent3").textContent = JSON.stringify(json,undefined,1))
 
 
    //fetch("/airquality/country")
