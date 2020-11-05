@@ -41,7 +41,12 @@ h5 {
   color : white;
   margin: 0.67em 0;
 }
-#datacontent{
+#datacontent1{
+  word-wrap: break-word;
+  color : "black";
+}
+
+#datacontent2{
   word-wrap: break-word;
   color : "black";
 }
@@ -1188,9 +1193,9 @@ legend {
   outline: 0;
 }
 
-#datadisplay h4{
+/*#datadisplay h4{
   display:none;
-}
+}*/
 
 .flatpickr-current-month input.cur-year[disabled], .flatpickr-current-month input.cur-year[disabled]:hover {
   font-size: 100%;

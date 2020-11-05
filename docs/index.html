@@ -49,15 +49,17 @@
 
         <div class="inner-form">
         <CENTER>
-            <button type="button" id="jsonbtn" >Afficher les résultats en JSON</button>
-            <button type="button" id="rdfbtn" >Afficher les résultats en RDF</button>
+            <button type="button" id="jsonbtn" >Show results in JSON</button>
+            <button type="button" id="rdfbtn" >Show results in RDF</button>
         </CENTER>
         </div>
 
-        <div id = "datadisplay">
-          <h4>Résultat :</h4>
+        <div id = "datadisplay" style = "display : none">
           <div id="response">
-               <div id=datacontent></div>
+               <h4>Air quality :</h4>
+               <pre id=datacontent1></pre>
+               <h4>Lockdowns :</h4>
+               <pre id=datacontent2></pre>
           </div>
         </div>
         </div>
@@ -71,47 +73,5 @@
       flatpickr(".datepicker",
       {});
     </script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
   </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
-    <script>
-
-function fetchehpadjson(route)
-{
-    fetch(route,
-                {
-                    method: 'GET',
-                    headers: { 'accept' : 'application/json'}
-                }
-            ).then(function(response){
-                response.json().then(function(data)
-                {
-                    document.getElementById("datacontent").innerHTML = JSON.stringify(data)
-                })
-            })
-}
-jsonbtn = document.getElementById("jsonbtn")
-
-jsonbtn.onclick = function()
-{
-    console.log("clicked on json")
-    fetchehpadjson('/pays')
-    var x = document.getElementById("datadisplay");
-    var col = document.getElementById("jsonbtn");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-      col.style.color = "white";
-      col.style.background = "black";
-    } else {
-      x.style.display = "none";
-      col.style.color = "black";
-      col.style.background = "grey";
-
-    }
-
-    document.getElementById("datacontent").style.color = "black";
-
-}
-
-  </script>
 </html>
