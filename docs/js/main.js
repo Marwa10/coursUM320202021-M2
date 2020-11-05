@@ -21,7 +21,14 @@ function fetchAirInfo(){
 
   fetch("/airquality/"+ sent_country + "/" +sent_date_from + "/" + sent_date_to)
   .then(res => res.json())          // convert to plain text
-  .then(json => console.log(json.results))
+  .then(json => console.log( "airquality info:",json.results))
+
+
+
+  fetch("/covid/" + sent_country + "/"+ sent_date_from)
+  .then(res => res.json())          // convert to plain text
+  .then(json => console.log("covid info:",json))
+
 
    //fetch("/airquality/country")
 
@@ -56,7 +63,6 @@ function fetActionEnd(){
 })
 
 }
-
 // Donnée covid date de fin
 function fetchActionEnd(){
   let country =  document.getElementById('search').value;
