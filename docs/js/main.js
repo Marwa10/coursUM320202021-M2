@@ -6,6 +6,8 @@
 
   function initialize() {
     document.getElementById("btn-search1").addEventListener("click", fetchAirInfo);
+    document.getElementById("jsonbtn").addEventListener("click", fetchAirInfo);
+
   }
 
 
@@ -19,15 +21,30 @@ function fetchAirInfo(){
   let sent_date_to = document.getElementById('return').value;
   console.log(sent_date_to);
 
+  var x = document.getElementById("datadisplay");
+  var col = document.getElementById("jsonbtn");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    col.style.color = "white";
+    col.style.background = "black";
+  } else {
+    x.style.display = "none";
+    col.style.color = "black";
+    col.style.background = "grey";
+
+  }
+
+  document.getElementById("datacontent1").style.color = "black";
+  document.getElementById("datacontent2").style.color = "black";
   fetch("/airquality/"+ sent_country + "/" +sent_date_from + "/" + sent_date_to)
   .then(res => res.json())          // convert to plain text
-  .then(json => console.log( "airquality info:",json.results))
+  .then(json => document.getElementById("datacontent1").textContent = JSON.stringify(json.results,undefined, 2))
 
 
 
   fetch("/covid/" + sent_country + "/"+ sent_date_from)
   .then(res => res.json())          // convert to plain text
-  .then(json => console.log("covid info:",json))
+  .then(json => document.getElementById("datacontent2").textContent = JSON.stringify(json,undefined,1))
 
   fetch("/covidinfo/enddate/" + sent_country + "/"+ sent_date_to)
   .then(res => res.json())          // convert to plain text
