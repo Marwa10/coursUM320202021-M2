@@ -48,15 +48,12 @@ h5 {
   color : white;
   margin: 0.67em 0;
 }
-#datacontent1{
+#datacontent{
   word-wrap: break-word;
   color : "black";
 }
 
-#datacontent2{
-  word-wrap: break-word;
-  color : "black";
-}
+
 
 /* Grouping content
    ========================================================================== */

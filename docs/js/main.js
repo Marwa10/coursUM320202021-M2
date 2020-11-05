@@ -34,22 +34,85 @@ function fetchAirInfo(){
 
   }
 
-  document.getElementById("datacontent1").style.color = "black";
-  document.getElementById("datacontent2").style.color = "black";
-  document.getElementById("datacontent3").style.color = "black";
+
+  let objet = {} ;
+  objet.Country = sent_country ;
+  objet.StartData = sent_date_from ;
+  objet.EndDate = sent_date_to ;
+
   fetch("/airquality/"+ sent_country + "/" +sent_date_from + "/" + sent_date_to)
-  .then(res => res.json())          // convert to plain text
-  .then(json => document.getElementById("datacontent1").textContent = JSON.stringify(json.results,undefined, 2))
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
+        let AirQualityMeasure = [];
+        let results = data.results;
+        results.forEach(function(result){
+          //console.log("resultat result",result.name)
+           AirQualityMeasure.push( { Date : result.date, Value: result.value , Location : result.location, Parameter : result.parameter, City : result.city});
+         });
+      objet.AirqualityMeasure = AirQualityMeasure;
+      })
+  })
+
+
+
 
 
 
   fetch("/covid/" + sent_country + "/"+ sent_date_from)
-  .then(res => res.json())          // convert to plain text
-  .then(json => document.getElementById("datacontent2").textContent = JSON.stringify(json,undefined,1))
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
+
+        let policyActions = [];
+        let results_policyActions = data.policyActions;
+        results_policyActions.forEach(function(result){
+          //console.log("resultat result",result.name)
+           policyActions.push( { Policy_type_display : result.policy_type_display, Policy_value: result.policyvalue,
+             Policy_value_actual: result.policyvalue_actual, Flagged: result.flagged, Notes: result.notes,
+             Policy_value_display_field : result.flag_value_display_field });
+         });
+
+         let stringencyData = [];
+         let results_stringencyData = data.stringencyData;
+           //console.log("resultat result",result.name)
+         stringencyData.push( { Confirmed : results_stringencyData.confirmed, Deaths: results_stringencyData.deaths,
+           Date: results_stringencyData.date_value,Stringency: results_stringencyData.stringency});
+         let CovidInfoStartData = {PolicyActions : policyActions, StringencyData : stringencyData };
+         objet.CovidInfoStartData = CovidInfoStartData;
+      })
+
+  })
+
+
+
 
   fetch("/covidinfo/enddate/" + sent_country + "/"+ sent_date_to)
-  .then(res => res.json())          // convert to plain text
-  .then(json => document.getElementById("datacontent3").textContent = JSON.stringify(json,undefined,1))
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
+
+        let policyActions = [];
+        let results_policyActions = data.policyActions;
+        results_policyActions.forEach(function(result){
+          //console.log("resultat result",result.name)
+           policyActions.push( { Policy_type_display : result.policy_type_display, Policy_value: result.policyvalue,
+             Policy_value_actual: result.policyvalue_actual, Flagged: result.flagged, Notes: result.notes,
+             Policy_value_display_field : result.flag_value_display_field });
+         });
+
+         let stringencyData = [];
+         let results_stringencyData = data.stringencyData;
+           //console.log("resultat result",result.name)
+         stringencyData.push( { Confirmed : results_stringencyData.confirmed, Deaths: results_stringencyData.deaths,
+           Date: results_stringencyData.date_value,Stringency: results_stringencyData.stringency});
+         let CovidInfoEndDate = {PolicyActions : policyActions, StringencyData : stringencyData };
+         objet.CovidInfoEndDate = CovidInfoEndDate;
+      document.getElementById("datacontent").textContent = JSON.stringify(objet,undefined,2);
+      })
+
+  })
+
 
 
    //fetch("/airquality/country")
@@ -117,11 +180,7 @@ fetch("/pays")
   })
 
 
-  const choices = new Choices('[data-trigger]',
-  {
-    searchEnabled: false,
-    itemSelectText: '',
-  });
+
 
     function isEmpty(){
       var str = document.forms['myForm'].search.value;
