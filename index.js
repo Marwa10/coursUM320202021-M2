@@ -14,6 +14,9 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
+
+let results_fetch = {};
+
 let init = [] ;
 let pays = [] ;
 let pays3 = [];
@@ -65,7 +68,7 @@ async function initialize(){
               //res.send("data fetched look your console");
               //},
               'application/json': function () {
-                  res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                  //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                   res.set('Content-Type', 'application/json');
                   res.json(json);
                 }
@@ -112,27 +115,18 @@ app.get("/covid/:country/:start", cors(corsOptions), function(req, res) {
   let country_name =  countries.getAlpha3Code(req.param("country"), "en");
   let date_start = req.param("start");
   console.log(country_name);
-
-  /*
-  for (var i = 0; i<pays3.length; i++){
-    if(pays3[i]){
-      if(pays3[i].substring(0,2)==test){
-        pays = pays3[i]
-    }
-  }
-} */
   let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country_name+"/"+date_start;
   console.log("2url", url)
   fetch(url)
     .then(res => res.json())
     .then(json => {
-      console.log("covid", json);
+      //console.log("covid", json);
       res.format({
             /*'text/html': function () {
             res.send("data fetched look your console");
           },*/
             'application/json': function () {
-                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
                 res.json(json);
               }
@@ -155,12 +149,96 @@ app.get("/covidinfo/enddate/:country/:end", cors(corsOptions), function(req, res
             res.send("data fetched look your console");
           },*/
             'application/json': function () {
-                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
                 res.json(json);
               }
             })
     });
+})
+
+app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res) {
+  let country_name = req.param("country");
+  let country3code = countries.getAlpha3Code( country_name, "en");
+  let country2code = countries.getAlpha2Code(country_name, "en");
+  let date = req.param("date");
+
+
+
+  let url_airquality = "https://api.openaq.org/v1/measurements?country=" +country2code +
+             "&date_from="+ date+ "&date_to="+ date + "&limit=50";
+  fetch(url_airquality)
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
+        results_fetch.Country = country_name ;
+        results_fetch.Data = date ;
+        let AirQualityMeasure = [];
+        let results = data.results;
+        results.forEach(function(result){
+          //console.log("resultat result",result.name)
+           AirQualityMeasure.push( {
+                                      Parameter : result.parameter,
+                                      Value: result.value ,
+                                      Unit : result.unit,
+                                      Coordinates : result.coordinates,
+                                      City : result.city});
+         });
+      results_fetch.AirqualityMeasure = AirQualityMeasure;
+      })
+  })
+
+  let url_covid = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country3code+"/"+date;
+  console.log(url_covid);
+  fetch(url_covid)
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
+        let policyActions = [];
+        let results_policyActions = data.policyActions;
+        //console.log( data.policyActions);
+        results_policyActions.forEach(function(result){
+          //console.log("resultat result",result.name)
+           policyActions.push( { Policy : result.policy_type_display,
+                                 //Policy_value: result.policyvalue,
+                                 //Policy_value_actual: result.policyvalue_actual,
+                                 Flagged: result.flagged,
+                                 Notes: result.notes,
+                                 Field : result.flag_value_display_field });
+         });
+        //console.log( 'results::',policyActions);
+        //results_fetch.Resultat = policyActions;
+
+         let stringencyData = [];
+         let results_stringencyData = data.stringencyData;
+           //console.log("resultat result",result.name)
+         stringencyData.push( { Confirmed : results_stringencyData.confirmed,
+                                Deaths: results_stringencyData.deaths,
+                                Stringency: results_stringencyData.stringency});
+         //let CovidInfoStartData = {PolicyActions : policyActions, StringencyData : stringencyData };
+        // console.log("covid info", CovidInfoStartData)
+         //results_fetch.CovidInfo = CovidInfoStartData;
+         results_fetch.CovidInfo = {PolicyActions : policyActions, StringencyData : stringencyData };
+
+      })
+
+  })
+  res.format({
+        /*'text/html': function () {
+        res.send("data fetched look your console");
+      },*/
+        'application/json': function () {
+            //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+            res.set('Content-Type', 'application/json');
+            res.json(results_fetch);
+          }
+        })
+
+
+
+  //res.send(results_fetch);
+
+
 })
 
 

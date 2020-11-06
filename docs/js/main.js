@@ -5,8 +5,39 @@
   window.addEventListener("load", initialize);
 
   function initialize() {
-    document.getElementById("btn-search1").addEventListener("click", fetchAirInfo);
-    document.getElementById("jsonbtn").addEventListener("click", fetchAirInfo);
+    document.getElementById("btn-search1").addEventListener("click", fetch_covid_airquality);
+    document.getElementById("jsonbtn").addEventListener("click", fetch_covid_airquality);
+
+  }
+
+
+
+  function fetch_covid_airquality(){
+    let country =  document.getElementById('search').value;
+    console.log(country);
+    let date = document.getElementById('depart').value;
+    console.log(date);
+
+    var x = document.getElementById("datadisplay");
+    var col = document.getElementById("jsonbtn");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      col.style.color = "white";
+      col.style.background = "black";
+    } else {
+      x.style.display = "none";
+      col.style.color = "black";
+      col.style.background = "grey";
+    }
+
+    let url = "/CovidAirQuality/" + country + "/"+ date;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2)
+
+    });
 
   }
 
@@ -112,24 +143,6 @@ function fetchAirInfo(){
       })
 
   })
-
-
-
-   //fetch("/airquality/country")
-
-
-
-   /*.then(function(response) {
-     response.json()
-       .then(function(data) {
-         console.log("c bon");
-         console.log(data); })
-
-}) */
-
-
-// fetch covid info:
-
 
 }
 
