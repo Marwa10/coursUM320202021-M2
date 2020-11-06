@@ -1,5 +1,9 @@
-<!-- Table covid_air_quality -->
 
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/">
+<!-- Table covid_air_quality -->
 <rdfs:Class rdf:about="/rdfvocabulary#covid_air_quality">
   <rdfs:label xml:lang="en">covid Air quality</rdfs:label>
   <rdfs:comment xml:lang="fr">Un concept pour représenter la qualité de l'aire
@@ -17,7 +21,7 @@
 <rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
   <rdfs:label xml:lang="en">Date</rdfs:label>
   <rdfs:comment xml:lang="fr">La date qu'on a mesuré la qualité de l'aire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Valu</rdfs:label>
+  <rdfs:label xlm:lang = "en">Value</rdfs:label>
   <rdfs:comment xml:lang="fr">La valeur de la qualité de l'aire</rdfs:comment>
   <rdfs:label xlm:lang = "en">Location</rdfs:label>
   <rdfs:comment xml:lang="fr">to change </rdfs:comment>
@@ -29,7 +33,7 @@
 
 <!-- Table stringency -->
 
-<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+<rdfs:Class rdf:about="/rdfvocabulary#stringency">
   <rdfs:label xml:lang="en">Confirmed</rdfs:label>
   <rdfs:comment xml:lang="fr">Le nombre de cas confirmé</rdfs:comment>
   <rdfs:label xlm:lang = "en">Death</rdfs:label>
@@ -42,7 +46,7 @@
 
 <!-- Table actions -->
 
-<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+<rdfs:Class rdf:about="/rdfvocabulary#actions ">
   <rdfs:label xml:lang="en">Policy_type_display</rdfs:label>
   <rdfs:comment xml:lang="fr">Description de Policy_value</rdfs:comment>
   <rdfs:label xlm:lang = "en">Policy_value</rdfs:label>
@@ -54,3 +58,5 @@
   <rdfs:label xlm:lang = "en">Policy_value_display_field</rdfs:label>
   <rdfs:comment xml:lang="fr">Niveau de rigeur de la police</rdfs:comment>
 <rdfs:Class/>
+
+</rdf:RDF>
