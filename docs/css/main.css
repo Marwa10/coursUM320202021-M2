@@ -16,6 +16,9 @@ body {
   margin: 0;
 }
 
+
+#mapid { height: 600px; }
+
 /**
  * Add the correct display in IE 9-.
  */

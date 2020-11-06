@@ -8,7 +8,10 @@
     document.getElementById("btn-search1").addEventListener("click", fetch_covid_airquality);
     document.getElementById("jsonbtn").addEventListener("click", fetch_covid_airquality);
 
+
+  // latitude & longitude
   }
+
 
 
 
@@ -29,16 +32,33 @@
       col.style.color = "black";
       col.style.background = "grey";
     }
+    let data_for_map = {} ;
+    var mymap = L.map('mapid').setView([48.833, 2.333], 3);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiYW5nZWxhMTEiLCJhIjoiY2toNmM2enN2MDdoNTJ0bDIzZG4yaHFjbyJ9.tAmv1tsl3AfZPZJMfK2KiA'
+  }).addTo(mymap);
 
-    let url = "/CovidAirQuality/" + country + "/"+ date;
+  var circle = L.circle([51.508, -0.11], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 800
+  }).addTo(mymap);
+
+  let url = "/CovidAirQuality/" + country + "/"+ date;
 
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2)
-
+      document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2);
+      data_for_map = data;
     });
-
+    console.log(data_for_map);
   }
 
 
