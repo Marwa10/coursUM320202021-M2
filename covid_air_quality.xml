@@ -1,14 +1,14 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
    xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/">
+
 <!-- Table covid_air_quality -->
 <rdfs:Class rdf:about="/rdfvocabulary#covid_air_quality">
   <rdfs:label xml:lang="en">covid Air quality</rdfs:label>
   <rdfs:comment xml:lang="fr">Un concept pour représenter la qualité de l'aire
     par rapport au mesures prise par un pays et les cas covid</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Pays</rdfs:label>
+  <rdfs:label xlm:lang = "fr">Pays</rdfs:label>
   <rdfs:comment xml:lang="fr">Le pays qu'on veut voir les infos</rdfs:comment>
   <rdfs:label xlm:lang = "en">date_start</rdfs:label>
   <rdfs:comment xml:lang="fr">La date de début </rdfs:comment>
@@ -19,27 +19,34 @@
 <!-- Table Air quality measure -->
 
 <rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
+  <rdfs:label xlm:lang = "en">Country</rdfs:label>
+  <rdfs:comment xml:lang="fr">Pays où la mesure a été effectuée</rdfs:comment>
   <rdfs:label xml:lang="en">Date</rdfs:label>
   <rdfs:comment xml:lang="fr">La date qu'on a mesuré la qualité de l'aire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Value</rdfs:label>
-  <rdfs:comment xml:lang="fr">La valeur de la qualité de l'aire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Location</rdfs:label>
-  <rdfs:comment xml:lang="fr">to change </rdfs:comment>
   <rdfs:label xlm:lang = "en">Parameter</rdfs:label>
   <rdfs:comment xml:lang="fr">Le paramètre calculé</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Value</rdfs:label>
+  <rdfs:comment xml:lang="fr">Valeur de la mesure de qualité d'aire</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Unit</rdfs:label>
+  <rdfs:comment xml:lang="fr">L'unité de la mesure</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Coordinates
+    <rdfs:label xlm:lang = "en">latitude</rdfs:label>
+    <rdfs:comment xml:lang="fr">Latitude où la mesure a été faite</rdfs:comment>
+    <rdfs:label xlm:lang = "en">longitude</rdfs:label>
+    <rdfs:comment xml:lang="fr">Longitude où la mesure a été faite</rdfs:comment>
+  </rdfs:label>
+  <rdfs:comment xml:lang="fr">Coordonnées où la mesure a été faite</rdfs:comment>
   <rdfs:label xlm:lang = "en">City</rdfs:label>
-  <rdfs:comment xml:lang="fr">Une ville du pays </rdfs:comment>
+  <rdfs:comment xml:lang="fr">La ville où la mesure a été faite</rdfs:comment>
 <rdfs:Class/>
 
 <!-- Table stringency -->
 
 <rdfs:Class rdf:about="/rdfvocabulary#stringency">
   <rdfs:label xml:lang="en">Confirmed</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le nombre de cas confirmé</rdfs:comment>
+  <rdfs:comment xml:lang="fr">Le nombre de cas confirmés</rdfs:comment>
   <rdfs:label xlm:lang = "en">Death</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le nombre de déces</rdfs:comment>
-  <rdfs:label xlm:lang = "en">date_value</rdfs:label>
-  <rdfs:comment xml:lang="fr">La date </rdfs:comment>
+  <rdfs:comment xml:lang="fr">Le nombre de décés</rdfs:comment>
   <rdfs:label xlm:lang = "en">stringency</rdfs:label>
   <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
 <rdfs:Class/>
@@ -47,16 +54,14 @@
 <!-- Table actions -->
 
 <rdfs:Class rdf:about="/rdfvocabulary#actions ">
-  <rdfs:label xml:lang="en">Policy_type_display</rdfs:label>
-  <rdfs:comment xml:lang="fr">Description de Policy_value</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Policy_value</rdfs:label>
-  <rdfs:comment xml:lang="fr">L'état de la police</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Policy_value_actual</rdfs:label>
-  <rdfs:comment xml:lang="fr"></rdfs:comment>
+  <rdfs:label xlm:lang = "en">Policy</rdfs:label>
+  <rdfs:comment xml:lang="fr">Règlement appliqué</rdfs:comment>
   <rdfs:label xlm:lang = "en">Flagged</rdfs:label>
   <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Policy_value_display_field</rdfs:label>
-  <rdfs:comment xml:lang="fr">Niveau de rigeur de la police</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Notes</rdfs:label>
+  <rdfs:comment xml:lang="fr">Commentaire</rdfs:comment>
+  <rdfs:label xlm:lang = "en">Field</rdfs:label>
+  <rdfs:comment xml:lang="fr">Etendue de l'action</rdfs:comment>
 <rdfs:Class/>
 
 </rdf:RDF>
