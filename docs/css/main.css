@@ -17,7 +17,9 @@ body {
 }
 
 
-#mapid { height: 600px; }
+#mapid {
+  height: 1000px;
+}
 
 /**
  * Add the correct display in IE 9-.
@@ -57,6 +59,41 @@ h5 {
 }
 
 
+.column {
+  float: left;
+  padding: 10px;
+  height: 130px;
+  background-color:rgba(255, 255, 255, 0.7);
+  text-align: center;
+  border-top: double;
+  border-bottom: double;
+  border-color: #cccccc;
+}
+
+.left {
+  width: 33.33%;
+  border-right: double;
+  border-left: double;
+  border-color: #cccccc;
+}
+
+.middle {
+  width: 33.33%;
+}
+
+.right {
+  width: 33.33%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#deaths, #confirmed, #stringency{
+  font-size: 25;
+}
 
 /* Grouping content
    ========================================================================== */

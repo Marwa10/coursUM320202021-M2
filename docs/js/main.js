@@ -32,23 +32,9 @@
       col.style.color = "black";
       col.style.background = "grey";
     }
-    let data_for_map = {} ;
-    var mymap = L.map('mapid').setView([48.833, 2.333], 3);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiYW5nZWxhMTEiLCJhIjoiY2toNmM2enN2MDdoNTJ0bDIzZG4yaHFjbyJ9.tAmv1tsl3AfZPZJMfK2KiA'
-  }).addTo(mymap);
 
-  var circle = L.circle([51.508, -0.11], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 800
-  }).addTo(mymap);
+
+
 
   let url = "/CovidAirQuality/" + country + "/"+ date;
 
@@ -56,9 +42,64 @@
     .then(response => response.json())
     .then(data => {
       document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2);
-      data_for_map = data;
+      document.getElementById("deaths").textContent = data.CovidInfo.StringencyData[0].Deaths ;
+      document.getElementById("confirmed").textContent = data.CovidInfo.StringencyData[0].Confirmed ;
+      document.getElementById("stringency").textContent = data.CovidInfo.StringencyData[0].Stringency ;
+
+      console.log(data.CovidInfo.StringencyData[0].Stringency);
+      //console.log(data.AirqualityMeasure[0].Coordinates.longitude);
+      let lat = data.AirqualityMeasure[0].Coordinates.latitude ;
+      let lon = data.AirqualityMeasure[0].Coordinates.longitude ;
+      document.getElementById('mapid').innerHTML = "< div id='map' style='width: 100%; height: 100%;'>";
+      var mymap = L.map('mapid').setView([lat, lon], 6);
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/light-v9',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiYW5nZWxhMTEiLCJhIjoiY2toNmM2enN2MDdoNTJ0bDIzZG4yaHFjbyJ9.tAmv1tsl3AfZPZJMfK2KiA'
+      }).addTo(mymap);
+      let res = data.AirqualityMeasure;
+      res.forEach(function(result){
+
+        //var marker = L.marker([result.Coordinates.latitude, result.Coordinates.longitude]).addTo(mymap);
+        var yourData = getInfoFrom(data).join(" <br>");
+
+        function getInfoFrom(data) {
+          var popupinfo = [];
+          popupinfo.push("<strong><font size=4>" + String(result.City) + " : "  + String(result.Value) + " " + String(result.Unit) + "</strong></font>" + " <br>");
+          for (var i = 0; i < data.CovidInfo.PolicyActions.length; i++) {
+            if (data.CovidInfo.PolicyActions[i].Flagged == true){
+              var stringLine = data.CovidInfo.PolicyActions[i].Policy + " : " + "<font color='green'>" + data.CovidInfo.PolicyActions[i].Flagged+"</font>";
+              popupinfo.push(stringLine);
+            }
+            if (data.CovidInfo.PolicyActions[i].Flagged == false){
+              var stringLine = data.CovidInfo.PolicyActions[i].Policy + " : " + "<font color='red'>" + data.CovidInfo.PolicyActions[i].Flagged+"</font>";
+              popupinfo.push(stringLine);
+            }
+
+
+          }
+          return popupinfo;
+        }
+
+        var circle = L.circle([result.Coordinates.latitude, result.Coordinates.longitude], {
+            //color: 'red',
+            fill : result.Value,
+            //radius: 500,
+            weight : result.Value,
+            opacity: 0.5
+        })
+        .bindPopup(yourData)
+        .addTo(mymap);
+
+
+
+      //  marker.bindPopup("result.Value").openPopup();
+      });
+
     });
-    console.log(data_for_map);
   }
 
 
