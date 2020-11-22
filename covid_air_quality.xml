@@ -1,67 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-   xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/">
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
 <!-- Table covid_air_quality -->
-<rdfs:Class rdf:about="/rdfvocabulary#covid_air_quality">
-  <rdfs:label xml:lang="en">covid Air quality</rdfs:label>
-  <rdfs:comment xml:lang="fr">Un concept pour représenter la qualité de l'aire
-    par rapport au mesures prise par un pays et les cas covid</rdfs:comment>
-  <rdfs:label xlm:lang = "fr">Pays</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le pays qu'on veut voir les infos</rdfs:comment>
-  <rdfs:label xlm:lang = "en">date_start</rdfs:label>
-  <rdfs:comment xml:lang="fr">La date de début </rdfs:comment>
-  <rdfs:label xlm:lang = "en">date_end</rdfs:label>
-  <rdfs:comment xml:lang="fr">La date de fin </rdfs:comment>
+
+<rdfs:Class rdf:about=":domaine:/rdfvocabulary#covid_air_quality">
+  <rdfs:label xml:lang ='fr'>covid_air_quality</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Les information du covid et la mesure de la qualité de l'aire </rdfs:comment>
 <rdfs:Class/>
 
-<!-- Table Air quality measure -->
+<!-- Table Air_quality_measure -->
 
-<rdfs:Class rdf:about="/rdfvocabulary#Air_quality measure">
-  <rdfs:label xlm:lang = "en">Country</rdfs:label>
-  <rdfs:comment xml:lang="fr">Pays où la mesure a été effectuée</rdfs:comment>
-  <rdfs:label xml:lang="en">Date</rdfs:label>
-  <rdfs:comment xml:lang="fr">La date qu'on a mesuré la qualité de l'aire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Parameter</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le paramètre calculé</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Value</rdfs:label>
-  <rdfs:comment xml:lang="fr">Valeur de la mesure de qualité d'aire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Unit</rdfs:label>
-  <rdfs:comment xml:lang="fr">L'unité de la mesure</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Coordinates
-    <rdfs:label xlm:lang = "en">latitude</rdfs:label>
-    <rdfs:comment xml:lang="fr">Latitude où la mesure a été faite</rdfs:comment>
-    <rdfs:label xlm:lang = "en">longitude</rdfs:label>
-    <rdfs:comment xml:lang="fr">Longitude où la mesure a été faite</rdfs:comment>
-  </rdfs:label>
-  <rdfs:comment xml:lang="fr">Coordonnées où la mesure a été faite</rdfs:comment>
-  <rdfs:label xlm:lang = "en">City</rdfs:label>
-  <rdfs:comment xml:lang="fr">La ville où la mesure a été faite</rdfs:comment>
+<rdfs:Class rdf:about="/rdfvocabulary#Air_quality_measure">
+  <rdfs:label xml:lang ='fr'>Air_quality_measure</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Table de la mesure de la qualité de l'aire </rdfs:comment>
+<rdfs:Class/>
+
+<!-- Table covid_info -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#covid_info">
+  <rdfs:label xml:lang ='fr'>covid_info</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Les information des restriction lié à la covid </rdfs:comment>
+<rdfs:Class/>
+
+<!-- Table Actions -->
+
+<rdfs:Class rdf:about="/rdfvocabulary#Actions">
+  <rdfs:label xml:lang ='fr'>actions</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Les restitrictions  </rdfs:comment>
 <rdfs:Class/>
 
 <!-- Table stringency -->
 
 <rdfs:Class rdf:about="/rdfvocabulary#stringency">
-  <rdfs:label xml:lang="en">Confirmed</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le nombre de cas confirmés</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Death</rdfs:label>
-  <rdfs:comment xml:lang="fr">Le nombre de décés</rdfs:comment>
-  <rdfs:label xlm:lang = "en">stringency</rdfs:label>
-  <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
+  <rdfs:label xml:lang ='fr'>stringency</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Les infos de la covid  </rdfs:comment>
 <rdfs:Class/>
 
-<!-- Table actions -->
+<!-- Table Coordinates -->
 
-<rdfs:Class rdf:about="/rdfvocabulary#actions ">
-  <rdfs:label xlm:lang = "en">Policy</rdfs:label>
-  <rdfs:comment xml:lang="fr">Règlement appliqué</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Flagged</rdfs:label>
-  <rdfs:comment xml:lang="fr">La rigeur des mesures</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Notes</rdfs:label>
-  <rdfs:comment xml:lang="fr">Commentaire</rdfs:comment>
-  <rdfs:label xlm:lang = "en">Field</rdfs:label>
-  <rdfs:comment xml:lang="fr">Etendue de l'action</rdfs:comment>
+<rdfs:Class rdf:about="/rdfvocabulary#Coordinates">
+  <rdfs:label xml:lang ='fr'>Coordinates</rdfs:label>
+  <rdfs:comment xml:lang ='fr'> Les coordonnées geographique de la ville  </rdfs:comment>
 <rdfs:Class/>
+
+<!-- Relation et propirété dans la table Covid Air_quality -->
+
+<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasAir_quality_mesure"
+              rdfs:label="hasAir_quality_mesure"
+              rdfs:comment="La mesure de la qualité de l'aire">
+    <rdfs:domain rdf:resource="#covid_air_quality"/>
+    <rdfs:range rdf:resource=":domain:/rdfvocabulary#Air_quality_measure"/>
+    <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+ </rdf:Property>
+
+ <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCovidInfo"
+               rdfs:label="hasCovidInfo"
+               rdfs:comment="Les infos de la covid">
+     <rdfs:domain rdf:resource="#covid_info"/>
+     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+  </rdf:Property>
+
+ <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+               rdfs:label="hasDate"
+               rdfs:comment="La date">
+     <rdfs:domain rdf:resource="#covid_air_quality"/>
+     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPays" rdfs:label="hasPays"
+  rdfs:comment="Le pays">
+      <rdfs:domain rdf:resource="#covid_air_quality"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+   </rdf:Property>
+
+
+
+<!-- Relation et propirété dans la table Air quality Measure -->
+
+<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+              rdfs:label="hasDate"
+              rdfs:comment="La Date">
+    <rdfs:domain rdf:resource="#Air_quality_measure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+ </rdf:Property>
+
+ <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasParameter"
+               rdfs:label="hasParameter"
+               rdfs:comment="Les paramètre de la mesure de la qualité de l'aire">
+     <rdfs:domain rdf:resource="#Air_quality_measure"/>
+     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCity"
+                rdfs:label="hasCity"
+                rdfs:comment="La ville">
+      <rdfs:domain rdf:resource="#Air_quality_measure"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+   </rdf:Property>
+
+   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasValue"
+                 rdfs:label="hasValue"
+                 rdfs:comment="La valeur de la qualité de l'aire">
+       <rdfs:domain rdf:resource="#Air_quality_measure"/>
+       <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasUnit"
+                  rdfs:label="hasUnit"
+                  rdfs:comment="L'unité de mesure de la qualité de l'aire">
+        <rdfs:domain rdf:resource="#Air_quality_measure"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+     </rdf:Property>
+
+     <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCoordinate"
+                   rdfs:label="hasCoordinate"
+                   rdfs:comment="Latitude et longitude de la ville">
+         <rdfs:domain rdf:resource="#Coordinates"/>
+         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+         <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+      </rdf:Property>
+
+<!-- Relation et propirété dans la table Coordinates -->
+
+<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasLatitude"
+              rdfs:label="hasLatitude"
+              rdfs:comment="Latitude de la ville">
+    <rdfs:domain rdf:resource="#Coordinates"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+ </rdf:Property>
+
+ <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasLongitude"
+               rdfs:label="hasLongitude"
+               rdfs:comment="Latitude de la ville">
+     <rdfs:domain rdf:resource="#Coordinates"/>
+     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+  </rdf:Property>
+
+  <!-- Relation et propirété dans la table Covid Infos-->
+
+  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+                rdfs:label="hasStringency"
+                rdfs:comment="Les infos d ela covid">
+      <rdfs:domain rdf:resource="#covid_info"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+   </rdf:Property>
+
+   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasActions"
+                 rdfs:label="hasActions"
+                 rdfs:comment="Les actions liées à la covid">
+       <rdfs:domain rdf:resource="#covid_info"/>
+       <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+    </rdf:Property>
+
+    <!--Relation et propirété dans la table Stringency -->
+
+    <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasConfirmed"
+                  rdfs:label="hasConfirmed"
+                  rdfs:comment="Le nombre de cas de covid confirmé">
+        <rdfs:domain rdf:resource="#stringency"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+     </rdf:Property>
+
+     <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDeath"
+                   rdfs:label="hasDeath"
+                   rdfs:comment="Lee nombre de décés lié à la covid">
+         <rdfs:domain rdf:resource="#stringency"/>
+         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+         <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+      </rdf:Property>
+
+      <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+                    rdfs:label="hasStringency"
+                    rdfs:comment="La rigeur des mesures prises">
+          <rdfs:domain rdf:resource="#covid_info"/>
+          <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+          <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+       </rdf:Property>
+<!-- Relation et propirété dans la table Actions -->
+
+<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasNotes"
+              rdfs:label="hasNotes"
+              rdfs:comment="Les commentaire de l'agent">
+    <rdfs:domain rdf:resource="#Actions"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+ </rdf:Property>
+
+ <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPolicy"
+               rdfs:label="hasPolicy"
+               rdfs:comment="La police">
+     <rdfs:domain rdf:resource="#Actions"/>
+     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about=":domaine:/rdfvocabulary#isFlagged"
+                rdfs:label="isFlagged"
+                rdfs:comment="existe">
+      <rdfs:domain rdf:resource="#Actions"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+   </rdf:Property>
+
+   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasField"
+                 rdfs:label="hasField"
+                 rdfs:comment="Le département de la police">
+       <rdfs:domain rdf:resource="#Actions"/>
+       <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
+    </rdf:Property>
 
 </rdf:RDF>
