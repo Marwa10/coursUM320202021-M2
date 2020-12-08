@@ -1,42 +1,61 @@
 'use strict'
 
 
+var mymap;
+var country;
+var date;
+
 //let token= "c649537876c0cf6eac009978cd1c83da68a1b38c";
   window.addEventListener("load", initialize);
 
   function initialize() {
     document.getElementById("btn-search1").addEventListener("click", fetch_covid_airquality);
-    document.getElementById("jsonbtn").addEventListener("click", fetch_covid_airquality);
+    document.getElementById("jsonbtn").addEventListener("click", sendtoapi);
+    //document.getElementById('mapid').innerHTML = "< div id='map' style='width: 100%; height: 100%;'>";
 
 
-  // latitude & longitude
+
   }
 
 
 
 
   function fetch_covid_airquality(){
-    let country =  document.getElementById('search').value;
-    console.log(country);
-    let date = document.getElementById('depart').value;
-    console.log(date);
-
-    var x = document.getElementById("datadisplay");
-    var col = document.getElementById("jsonbtn");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-      col.style.color = "white";
-      col.style.background = "black";
-    } else {
-      x.style.display = "none";
-      col.style.color = "black";
-      col.style.background = "grey";
+    console.log(country, date);
+    if(country ) {
+      country = null;
+    }
+    if(date) {
+      date = null;
     }
 
 
+     country =  document.getElementById('search').value;
+    //console.log(country);
+     date = document.getElementById('depart').value;
+    //console.log(date);
+    //document.getElementById('map').display = "block";
+  console.log("after", country, date);
+    if (mymap != undefined) {
+      mymap.off();
+      mymap.remove();
+    }
+    mymap = L.map('map').setView([51.505, -0.09], 13);
+    //console.log(mymap);
+     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoiYW5nZWxhMTEiLCJhIjoiY2toNmM2enN2MDdoNTJ0bDIzZG4yaHFjbyJ9.tAmv1tsl3AfZPZJMfK2KiA'
+    }).addTo(mymap);
+
+    setTimeout(function () { mymap.invalidateSize() }, 1200);
 
 
-  let url = "/CovidAirQuality/" + country + "/"+ date;
+
+    let url = "/CovidAirQuality/" + country + "/"+ date;
 
     fetch(url)
     .then(response => response.json())
@@ -46,20 +65,17 @@
       document.getElementById("confirmed").textContent = data.CovidInfo.StringencyData[0].Confirmed ;
       document.getElementById("stringency").textContent = data.CovidInfo.StringencyData[0].Stringency ;
 
-      console.log(data.CovidInfo.StringencyData[0].Stringency);
-      //console.log(data.AirqualityMeasure[0].Coordinates.longitude);
-      let lat = data.AirqualityMeasure[0].Coordinates.latitude ;
-      let lon = data.AirqualityMeasure[0].Coordinates.longitude ;
-      document.getElementById('mapid').innerHTML = "< div id='map' style='width: 100%; height: 100%;'>";
-      var mymap = L.map('mapid').setView([lat, lon], 6);
-      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/light-v9',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiYW5nZWxhMTEiLCJhIjoiY2toNmM2enN2MDdoNTJ0bDIzZG4yaHFjbyJ9.tAmv1tsl3AfZPZJMfK2KiA'
-      }).addTo(mymap);
+
+      let lat = data.Geo.latitude ;
+      console.log("lat", lat);
+      let lon = data.Geo.longitude ;
+      console.log("lon", lon);
+
+      console.log("mymap",mymap);
+
+      mymap.setView(new L.LatLng(lat, lon), 6);
+      //L.map('map').panTo(new L.LatLng(lat, lon));
+
       let res = data.AirqualityMeasure;
       res.forEach(function(result){
 
@@ -100,6 +116,42 @@
       });
 
     });
+  }
+
+
+
+  function sendtoapi(){
+    document.getElementById("map").style.display = "none";
+
+    let country =  document.getElementById('search').value;
+    console.log(country);
+    let date = document.getElementById('depart').value;
+    console.log(date);
+
+
+
+
+  let url = "/CovidAirQuality/" + country + "/"+ date;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2);
+    });
+
+    var x = document.getElementById("datadisplay");
+    var col = document.getElementById("jsonbtn");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      col.style.color = "white";
+      col.style.background = "black";
+    } else {
+      x.style.display = "none";
+      col.style.color = "black";
+      col.style.background = "grey";
+    }
+
+
   }
 
 

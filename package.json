@@ -19,8 +19,9 @@
   "homepage": "https://github.com/natoine/coursUM320202021-M2#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "country-js": "0.0.9",
     "express": "^4.17.1",
-    "i18n-iso-countries": "^6.2.2",
+    "i18n-iso-countries": "^6.3.0",
     "node-fetch": "^2.6.1"
   }
 }

@@ -7,6 +7,10 @@ const port = process.env.PORT || 3000 ;
 var https = require('https');
 var cors = require('cors');
 var countries = require("i18n-iso-countries");
+var n = require('country-js');
+
+var date;
+var country_name;
 
 
 var corsOptions = {
@@ -143,7 +147,7 @@ app.get("/covidinfo/enddate/:country/:end", cors(corsOptions), function(req, res
   fetch(url)
     .then(res => res.json())
     .then(json => {
-      console.log("covid end", json);
+      //console.log("covid end", json);
       res.format({
             /*'text/html': function () {
             res.send("data fetched look your console");
@@ -158,10 +162,22 @@ app.get("/covidinfo/enddate/:country/:end", cors(corsOptions), function(req, res
 })
 
 app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res) {
-  let country_name = req.param("country");
+  country_name = null;
+  date = null;
+
+
+  country_name = req.param("country");
   let country3code = countries.getAlpha3Code( country_name, "en");
   let country2code = countries.getAlpha2Code(country_name, "en");
-  let date = req.param("date");
+  date = req.param("date");
+
+  //let geo_name = n.search(country_name);
+  let geo_2code = n.search(country2code);
+  //let geo_3code = n.search(country3code);
+  //console.log("geo name:", geo_name);
+  //console.log("data:",geo_2code);
+  //console.log("geo 2:", geo_2code[0].geo);
+  //console.log("geo 3:", geo_3code);
 
 
 
@@ -172,7 +188,8 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
     response.json()
       .then(function(data) {
         results_fetch.Country = country_name ;
-        results_fetch.Data = date ;
+        results_fetch.Date = date ;
+        results_fetch.Geo = geo_2code[0].geo;
         let AirQualityMeasure = [];
         let results = data.results;
         results.forEach(function(result){
