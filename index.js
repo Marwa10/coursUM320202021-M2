@@ -9,8 +9,7 @@ var cors = require('cors');
 var countries = require("i18n-iso-countries");
 var n = require('country-js');
 
-var date;
-var country_name;
+
 
 
 var corsOptions = {
@@ -162,27 +161,23 @@ app.get("/covidinfo/enddate/:country/:end", cors(corsOptions), function(req, res
 })
 
 app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res) {
-  country_name = null;
-  date = null;
-
-
-  country_name = req.param("country");
+  //var date = null;
+  //var country_name = null;
+  let country_name = req.param("country");
+  console.log("country",country_name);
+  let date = req.param("date");
+  console.log("date",date);
   let country3code = countries.getAlpha3Code( country_name, "en");
   let country2code = countries.getAlpha2Code(country_name, "en");
-  date = req.param("date");
 
-  //let geo_name = n.search(country_name);
   let geo_2code = n.search(country2code);
-  //let geo_3code = n.search(country3code);
-  //console.log("geo name:", geo_name);
-  //console.log("data:",geo_2code);
-  //console.log("geo 2:", geo_2code[0].geo);
-  //console.log("geo 3:", geo_3code);
+
 
 
 
   let url_airquality = "https://api.openaq.org/v1/measurements?country=" +country2code +
              "&date_from="+ date+ "&date_to="+ date + "&limit=50";
+  console.log("url air:",url_airquality);
   fetch(url_airquality)
   .then(function(response) {
     response.json()
@@ -192,6 +187,9 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
         results_fetch.Geo = geo_2code[0].geo;
         let AirQualityMeasure = [];
         let results = data.results;
+        //console.log( "results air1",data);
+        //console.log( "results air2",data.results);
+
         results.forEach(function(result){
           //console.log("resultat result",result.name)
            AirQualityMeasure.push( {
@@ -201,16 +199,18 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
                                       Coordinates : result.coordinates,
                                       City : result.city});
          });
+
       results_fetch.AirqualityMeasure = AirQualityMeasure;
       })
   })
 
   let url_covid = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country3code+"/"+date;
-  console.log(url_covid);
+  console.log("url covid",url_covid);
   fetch(url_covid)
   .then(function(response) {
     response.json()
       .then(function(data) {
+        //onsole.log("data covid", data);
         let policyActions = [];
         let results_policyActions = data.policyActions;
         //console.log( data.policyActions);
@@ -236,20 +236,22 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
         // console.log("covid info", CovidInfoStartData)
          //results_fetch.CovidInfo = CovidInfoStartData;
          results_fetch.CovidInfo = {PolicyActions : policyActions, StringencyData : stringencyData };
+         console.log( " dans le fetch ",results_fetch);
 
       })
-
+      res.format({
+            /*'text/html': function () {
+            res.send("data fetched look your console");
+          },*/
+            'application/json': function () {
+                //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                res.set('Content-Type', 'application/json');
+                res.json(results_fetch);
+                //console.log( " dans le format ",results_fetch);
+              }
+            })
   })
-  res.format({
-        /*'text/html': function () {
-        res.send("data fetched look your console");
-      },*/
-        'application/json': function () {
-            //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
-            res.set('Content-Type', 'application/json');
-            res.json(results_fetch);
-          }
-        })
+
 
 
 
