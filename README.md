@@ -25,19 +25,19 @@ Nos API proviennent de  :
 
 BD pour alimenter la liste déroulante : https://www.nationsonline.org/oneworld/country_code_list.htm
 
-Nous avons selectioné 2 API portants sur le secteur environnementale et covid.
+Nous avons selectionné 2 API portants sur le secteur environnementale et épidémiologique.
 
-La première permet de récupérer des informations sur la qualité d'air dans un pays. 
+### Open AQ
+Alimentée et entretenue par une communauté de chercheurs et professionels de l'environnement, cette API
+regroupe des données de qualité d'air à travers le monde entier. Nous avons la possibilité de récupérer des informations pour un ou plusieurs pays. 
 Les paramètres utilisés pour effectuer la requête sont le nom du pays et la date d'enregistrement , cela permet de récupérer un ensemble d'informations sur les pays (Nom, Valeur, Mesure, Ville...)
 
-Lien API qualité d'air
+Lien: https://docs.openaq.org
 
+### The Oxford COVID-19 Government Response Tracker
+Cette API est proposée par l'université d'Oxford, elle permet d'avoir accès aux données de décisions gouvernementales associées à la situation sanitaire dépendamment de l'évolution national de la Covid-19. Nous pouvons donc, comme dans l'API précédent, sélectionner un pays ou plusieurs pays avec une date ou un intervalle de temps. Les paramètres que nous avons utilisé sont nom du pays et la date.
 
-
-La seconde API est semblable  la première, fonctionne de la même facon mais porte sur le covid. Les paramètres que nous avons utilisé sont nom du pays et la date.
-Cela nous permet de récupérer les informations sur le covid d'un pays.
-
-Lien API Covid
+Lien: https://covidtracker.bsg.ox.ac.uk/about-api
 
 Nous n'affichons pas l'ensemble des résultats que nous renvoient les API. En effet nous avons sélectionné les informations qui nous semblaient intéressantes à proposées mais aussi les informations qui étaient complètes, certaines variables étaient peu renseignées.
 
