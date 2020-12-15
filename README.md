@@ -11,16 +11,17 @@
 - Liens heroku : https://projetodata.herokuapp.com/
 
 ## Air quality and lockdowns API :
-- json : 
-- xml : 
+- json : https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/json
+         Exemple : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-03-04/json
+- xml : https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/xml
+        Exemple : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-03-04/xml
 
-https://projetodata.herokuapp.com/CovidAirQuality/SPAIN/10-10-2020
-https://projetodata.herokuapp.com/
+## Sources de données : 
 
-## Données et APIs utilisées : 
-Nos API proviennent de  : - https://docs.openaq.org 
-                          
-     - https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker
+Pour réaliser 
+Nos API proviennent de  : 
+- https://docs.openaq.org 
+- https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker
 
 BD pour alimenter la liste déroulante : https://www.nationsonline.org/oneworld/country_code_list.htm
 
@@ -40,5 +41,8 @@ Lien API Covid
 
 Nous n'affichons pas l'ensemble des résultats que nous renvoient les API. En effet nous avons sélectionné les informations qui nous semblaient intéressantes à proposées mais aussi les informations qui étaient complètes, certaines variables étaient peu renseignées.
 
+## Choix des sources de données :
+
+## Méthodes utilisés : 
 
 
