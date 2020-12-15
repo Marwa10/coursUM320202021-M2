@@ -10,11 +10,6 @@ var date;
 
   function initialize() {
     document.getElementById("btn-search1").addEventListener("click", fetch_covid_airquality);
-    document.getElementById("jsonbtn").addEventListener("click", sendtoapi);
-    //document.getElementById('mapid').innerHTML = "< div id='map' style='width: 100%; height: 100%;'>";
-
-
-
   }
 
 
@@ -61,6 +56,7 @@ var date;
     .then(response => response.json())
     .then(data => {
       document.getElementById("datacontent").textContent = JSON.stringify(data,undefined,2);
+      document.getElementById("deaths").textContent = "" ;
       document.getElementById("deaths").textContent = data.CovidInfo.StringencyData[0].Deaths ;
       document.getElementById("confirmed").textContent = data.CovidInfo.StringencyData[0].Confirmed ;
       document.getElementById("stringency").textContent = data.CovidInfo.StringencyData[0].Stringency ;
@@ -73,7 +69,7 @@ var date;
 
       console.log("mymap",mymap);
 
-      mymap.setView(new L.LatLng(lat, lon), 6);
+      mymap.setView(new L.LatLng(lat, lon), 5);
       //L.map('map').panTo(new L.LatLng(lat, lon));
 
       let res = data.AirqualityMeasure;
