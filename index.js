@@ -45,35 +45,37 @@ async function initialize(){
 
 
 
-// Fetch measurments of a specific country and date range
+// Fetch airquality measurments of a specific country and date range
  app.get("/airquality/:country/:date_from/:date_to/:format?",
  //app.get("/airquality/country/",
        cors(corsOptions), function(req, res){
-    /*
-    let country_name = "FR";
-    let d_from="2020-10-01";
-    let d_to ="2020-10-30"; */
+    let air_results = {};
 
     let country_name =  countries.getAlpha2Code(req.param("country"), "en");
-    console.log(country_name);
-    //country_name = countries.getAlpha2Code(country_name, "en")
     let d_from = req.param("date_from");
     let d_to = req.param("date_to");
 
     let url = "https://api.openaq.org/v1/measurements?country=" +country_name +
                "&date_from="+ d_from+ "&date_to="+ d_to + "&limit=10";
-    console.log(url);
     fetch(url)
       .then(res => res.json())
       .then(data => {
       req.negotiate(req.params.format,{
-              //'text/html': function () {
-              //res.send("data fetched look your console");
-              //},
               'application/json': function () {
-                  //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                   res.set('Content-Type', 'application/json');
-                  res.json(data);
+                  air_results.Country = country_name;
+                  air_results.Date = d_from;
+                  let city = [];
+                  data.results.forEach(function(result){
+                     city.push( { City : result.city,
+                                  Parameter : result.parameter,
+                                  Value: result.value ,
+                                  Unit : result.unit,
+                                  Coordinates : result.coordinates});
+                   });
+
+                  air_results.AirQualityMeasure = city;
+                  res.json(air_results);
                 },
                 'application/xml':function() {
                   res.setHeader("Content-disposition", "attachement; filename = Airquality.rdf ")
@@ -82,7 +84,7 @@ async function initialize(){
                   xmlrdf += '\t<projetodata:AirQuality>\n'
                   xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                   xmlrdf += '\t\t<projetodata:hasDate>' + d_to + '</projetoD:hasDate>\n'
-                //  xmlrdf += '\t\t\t<projetodata:hasGeo>'+ geo_2code[0].geo +'</projetodata:hasGeo>\n';
+                  xmlrdf += '\t\t\t<projetodata:AirqualityMeasure>\n'
 
                 data.results.forEach(function(result){
                       xmlrdf += '\t\t\t<projetodata:City>\n'
@@ -91,9 +93,10 @@ async function initialize(){
                       xmlrdf += '\t\t\t\t<projetodata:hasValue>' + result.value + '</projetodata:hasValue>\n'
                       xmlrdf += '\t\t\t\t<projetodata:hasUnit>' + result.unit + '</projetodata:hasUnit>\n'
                       xmlrdf += '\t\t\t\t<projetodata:hasCoordinates>' + [result.coordinates.latitude, result.coordinates.longitude]  + '</projetodata:hasCoordinates>\n'
-                      xmlrdf += '\t\t\t</projetodata:City>\n'
+                      xmlrdf += '\t\t\t</projetodata:City\n'
                     });
-                  xmlrdf += '\t<projetodata:AirQuality>\n'
+                xmlrdf += '\t\t\t<projetodata:AirqualityMeasure>\n'
+                xmlrdf += '\t<projetodata:AirQuality>\n'
 
                 res.set('Content-Type', 'application/xml');
                 res.send(xmlrdf);
@@ -104,38 +107,12 @@ async function initialize(){
 
 
 
-
+// Populate the website with available countries
 app.get("/pays", function(req, res) {
   res.send(pays);
       })
 
-
-
-// API Covid start date
-app.get("/covid/:country/:start/:format?", cors(corsOptions), function(req, res) {
-  let country_name =  countries.getAlpha3Code(req.param("country"), "en");
-  let date_start = req.param("start");
-  let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country_name+"/"+date_start;
-  console.log("2url", url)
-  fetch(url)
-    .then(res => res.json())
-    .then(json => {
-      //console.log("covid", json);
-      req.negotiate(req.params.format,{
-            /*'text/html': function () {
-            res.send("data fetched look your console");
-          },*/
-            'application/json': function () {
-                //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
-                res.set('Content-Type', 'application/json');
-                res.json(json);
-              }
-            })
-    });
-})
-
-
-
+// API to get covid info
 app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function(req, res) {
   let country_name =  countries.getAlpha3Code(req.param("country"), "en");
   let date_end = req.param("end");
@@ -144,13 +121,33 @@ app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function
   .then(function(response) {
     response.json()
       .then(function(data) {
-      //console.log("covid end", json);
       req.negotiate(req.params.format,{
 
             'application/json': function () {
-                //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
-                res.json(data);
+                let policy_result = [];
+                data.policyActions.forEach(function(result){
+                  //console.log("resultat result",result.name)
+                   policy_result.push( { Policy : result.policy_type_display,
+                                         Field : result.flag_value_display_field,
+                                         Flagged: result.flagged,
+                                         Notes: result.notes,
+
+                                       });
+                 });
+
+
+                 let stringency_result = [];
+                 stringency_result.push( { Confirmed : data.stringencyData.confirmed,
+                                        Deaths: data.stringencyData.deaths,
+                                        Stringency: data.stringencyData.stringency});
+                 let covid_result = {};
+                 covid_result.Country = country_name;
+                 covid_result.Date = date_end;
+                 covid_result.StringencyData = stringency_result;
+                 covid_result.PolicyActions = policy_result;
+
+                res.json(covid_result);
               },
               'application/xml':function() {
                 res.setHeader("Content-disposition", "attachement; filename = covidinfo.rdf ")
@@ -159,21 +156,25 @@ app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function
                 xmlrdf += '\t<projetodata:CovidInfo>\n'
                 xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                 xmlrdf += '\t\t<projetodata:hasDate>' + date_end + '</projetoD:hasDate>\n'
+
+                xmlrdf += '\t\t\t<projetodata:hasStringencyData>\n'
                 xmlrdf += '\t\t<projetodata:hasConfimed>' + data.stringencyData.confirmed + '</projetoD:hasConfimed>\n'
                 xmlrdf += '\t\t<projetodata:hasDeaths>' + data.stringencyData.deaths + '</projetoD:hasDeath>\n'
                 xmlrdf += '\t\t<projetodata:hasStringency>' + data.stringencyData.stringency + '</projetoD:hasStringency>\n'
+                xmlrdf += '\t\t\t</projetodata:hasStringencyData>\n'
 
-                xmlrdf += '\t\t\t<projetodata:hasActions>\n'
+
+                xmlrdf += '\t\t\t<projetodata:hasPolicyActions>\n'
 
                 data.policyActions.forEach(function(result){
                   xmlrdf += '\t\t\t<projetodata:hasPolicy>\n'
                   xmlrdf += '\t\t\t\t<projetodata:hasPolicy>' + result.policy_type_display + '</projetodata:hasPolicy>\n'
-                  xmlrdf += '\t\t\t\t<projetodata:hasNotes>' + result.notes + '</projetodata:hasConfimed>\n'
-                  xmlrdf += '\t\t\t\t<projetodata:hasField>' + result.flag_value_display_field + '</projetodata:hasDeath>\n'
-                  xmlrdf += '\t\t\t\t<projetodata:isFlagged>' + result.flagged + '</projetodata:hasStringency>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:hasField>' + result.flag_value_display_field + '</projetodata:hasField>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:isFlagged>' + result.flagged + '</projetodata:isFlagged>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:hasNotes>' + result.notes + '</projetodata:hashasNotes>\n'
                   xmlrdf += '\t\t\t</projetodata:hasPolicy>\n'
                   })
-                  xmlrdf += '\t\t\t</projetodata:hasActions>\n'
+                  xmlrdf += '\t\t\t</projetodata:hasPolicyActions>\n'
 
 
                 xmlrdf += '\t<projetodata:CovidInfo>\n'
@@ -185,6 +186,9 @@ app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function
     })
   });
 })
+
+
+// Custom query that combines both fetches
 
 app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(req, res) {
   //var date = null;
@@ -210,12 +214,11 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
         let results = data.results;
 
         results.forEach(function(result){
-           AirQualityMeasure.push( {
+           AirQualityMeasure.push( {  City : result.city,
                                       Parameter : result.parameter,
                                       Value: result.value ,
                                       Unit : result.unit,
-                                      Coordinates : result.coordinates,
-                                      City : result.city
+                                      Coordinates : result.coordinates
                                     });
          });
 
@@ -232,17 +235,13 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
         results_policyActions.forEach(function(result){
           //console.log("resultat result",result.name)
            policyActions.push( { Policy : result.policy_type_display,
-                                 //Policy_value: result.policyvalue,
-                                 //Policy_value_actual: result.policyvalue_actual,
+                                 Field : result.flag_value_display_field,
                                  Flagged: result.flagged,
                                  Notes: result.notes,
-                                 Field : result.flag_value_display_field
+
                                });
          });
 
-
-        //console.log( 'results::',policyActions);
-        //results_fetch.Resultat = policyActions;
 
          let stringencyData = [];
          let results_stringencyData = data.stringencyData;
@@ -250,10 +249,9 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
          stringencyData.push( { Confirmed : results_stringencyData.confirmed,
                                 Deaths: results_stringencyData.deaths,
                                 Stringency: results_stringencyData.stringency});
-         //let CovidInfoStartData = {PolicyActions : policyActions, StringencyData : stringencyData };
-        // console.log("covid info", CovidInfoStartData)
-         //results_fetch.CovidInfo = CovidInfoStartData;
-         results_fetch.CovidInfo = {PolicyActions : policyActions, StringencyData : stringencyData };
+
+         results_fetch.CovidInfo = { StringencyData : stringencyData ,
+           PolicyActions : policyActions};
 
 
       req.negotiate(req.params.format,{
@@ -268,11 +266,12 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
                 var xmlrdf = `<?xml version="1.0"?>\n`
                 xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
                 xmlrdf += '\t<projetodata:CovidAirQuality>\n'
-                xmlrdf += '\t\t<projetodata:hasAirQualityMesure>\n'
+
                 xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                 xmlrdf += '\t\t<projetodata:hasDate>' + date + '</projetoD:hasDate>\n'
                 xmlrdf += '\t\t\t<projetodata:hasGeo>'+ [geo_2code[0].geo.latitude, geo_2code[0].geo.longitude] +'</projetodata:hasGeo>\n';
 
+                xmlrdf += '\t\t</projetodata:hasAirQualityMesure>\n'
                 results_fetch.AirqualityMeasure.forEach(function(result){
                     xmlrdf += '\t\t\t<projetodata:City>\n'
                     xmlrdf += '\t\t\t<projetodata:City>' +result.City +'</projetodata:City>\n'
@@ -283,25 +282,29 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
                     xmlrdf += '\t\t\t</projetodata:City>\n'
                   });
               xmlrdf += '\t\t</projetodata:hasAirQualityMesure>\n'
+
+
               xmlrdf += '\t\t<projetodata:hasCovidInfo>\n'
-              xmlrdf += '\t\t\t<projetodata:hasStringency>\n'
+              xmlrdf += '\t\t\t<projetodata:hasStringencyData>\n'
               xmlrdf += '\t\t\t\t<projetodata:hasConfimed>' + results_stringencyData.confirmed + '</projetodata:hasConfimed>\n'
               xmlrdf += '\t\t\t\t<projetodata:hasDeath>' + results_stringencyData.deaths + '</projetodata:hasDeath>\n'
               xmlrdf += '\t\t\t\t<projetodata:hasStringency>' + results_stringencyData.stringency + '</projetodata:hasStringency>\n'
-              xmlrdf += '\t\t\t</projetodata:hasStringency>\n'
+              xmlrdf += '\t\t\t</projetodata:hasStringencyData>\n'
+              xmlrdf += '\t\t</projetodata:hasCovidInfo>\n'
 
-              xmlrdf += '\t\t\t<projetodata:hasActions>\n'
+              xmlrdf += '\t\t\t<projetodata:hasPolicyActions>\n'
 
               policyActions.forEach(function(result){
                 xmlrdf += '\t\t\t<projetodata:hasPolicy>\n'
                 xmlrdf += '\t\t\t\t<projetodata:hasPolicy>' + result.Policy + '</projetodata:hasPolicy>\n'
-                xmlrdf += '\t\t\t\t<projetodata:hasNotes>' + result.Notes + '</projetodata:hasConfimed>\n'
-                xmlrdf += '\t\t\t\t<projetodata:hasField>' + result.Field + '</projetodata:hasDeath>\n'
-                xmlrdf += '\t\t\t\t<projetodata:isFlagged>' + result.Flagged + '</projetodata:hasStringency>\n'
+                xmlrdf += '\t\t\t\t<projetodata:hasField>' + result.Field + '</projetodata:hasField>\n'
+                xmlrdf += '\t\t\t\t<projetodata:hasNotes>' + result.Notes + '</projetodata:hasNotes>\n'
+                xmlrdf += '\t\t\t\t<projetodata:isFlagged>' + result.Flagged + '</projetodata:isFlagged>\n'
+
                 xmlrdf += '\t\t\t</projetodata:hasPolicy>\n'
                 })
-                xmlrdf += '\t\t\t</projetodata:hasActions>\n'
-                xmlrdf += '\t\t</projetodata:hasCovidInfo>\n'
+                xmlrdf += '\t\t\t</projetodata:hasPolicyActions>\n'
+
                 xmlrdf += '\t</projetodata:CovidAirQuality>\n'
 
               res.set('Content-Type', 'application/xml');
