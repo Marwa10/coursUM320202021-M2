@@ -28,7 +28,7 @@ BD pour alimenter la liste déroulante : https://www.nationsonline.org/oneworld/
 Nous avons selectionné 2 API portants sur le secteur environnementale et épidémiologique.
 
 ### Open AQ
-Alimentée et entretenue par une communauté de chercheurs et professionels de l'environnement, cette API
+Alimentée et entretenue par une communauté de chercheurs et professionnels de l'environnement, cette API
 regroupe des données de qualité d'air à travers le monde entier. Nous avons la possibilité de récupérer des informations pour un ou plusieurs pays. 
 Les paramètres utilisés pour effectuer la requête sont le nom du pays et la date d'enregistrement , cela permet de récupérer un ensemble d'informations sur les pays (Nom, Valeur, Mesure, Ville...)
 
@@ -42,6 +42,12 @@ Lien: https://covidtracker.bsg.ox.ac.uk/about-api
 Nous n'affichons pas l'ensemble des résultats que nous renvoient les API. En effet nous avons sélectionné les informations qui nous semblaient intéressantes à proposées mais aussi les informations qui étaient complètes, certaines variables étaient peu renseignées.
 
 ## Choix des sources de données :
+
+### Objectif
+Au vu de l'actualité, nous voulions, à travers les multitudes effets de la pandémie du covid-19, avoir un aperçu d'un lien potentiel entre les décisions gouvernementales menées en parallèles des situations sanitaires et une amélioration éventuelle de l'atmosphère mondial. Est-ce que des mesures de restrictions à plusieurs degrés mènent à un changement significatif de la qualité de l'air? C'est pourquoi nous proposons de faire ce croisement d'API afin de permettre des possibilité d'analyses de causes et effet
+
+### Pertinence
+Les deux API possèdent chacune une combinaison de clés date/pays qui permettent une correspondance parfaite pour pouvoir être lié. C'est ainsi que nous avons pu ensuite reconstruire une structure adaptée à l'objectif de notre API
 
 ## Méthodes utilisés : 
 
