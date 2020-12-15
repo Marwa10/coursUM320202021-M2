@@ -46,7 +46,7 @@ async function initialize(){
 
 
 // Fetch measurments of a specific country and date range
- app.get("/airquality/:country/:date_from/:date_to",
+ app.get("/airquality/:country/:date_from/:date_to/:format?",
  //app.get("/airquality/country/",
        cors(corsOptions), function(req, res){
     /*
@@ -65,45 +65,42 @@ async function initialize(){
     console.log(url);
     fetch(url)
       .then(res => res.json())
-      .then(json => {
-        console.log("fetchair", json);
-        res.format({
+      .then(data => {
+      req.negotiate(req.params.format,{
               //'text/html': function () {
               //res.send("data fetched look your console");
               //},
               'application/json': function () {
                   //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                   res.set('Content-Type', 'application/json');
-                  res.json(json);
-                }
+                  res.json(data);
+                },
+                'application/xml':function() {
+                  res.setHeader("Content-disposition", "attachement; filename = Airquality.rdf ")
+                  var xmlrdf = `<?xml version="1.0"?>\n`
+                  xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+                  xmlrdf += '\t<projetodata:AirQuality>\n'
+                  xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
+                  xmlrdf += '\t\t<projetodata:hasDate>' + d_to + '</projetoD:hasDate>\n'
+                //  xmlrdf += '\t\t\t<projetodata:hasGeo>'+ geo_2code[0].geo +'</projetodata:hasGeo>\n';
+
+                data.results.forEach(function(result){
+                      xmlrdf += '\t\t\t<projetodata:City>\n'
+                      xmlrdf += '\t\t\t<projetodata:City>' +result.city +'</projetodata:City>\n'
+                      xmlrdf += '\t\t\t\t<projetodata:hasParameter>' + result.parameter + '</projetodata:hasParameter>\n'
+                      xmlrdf += '\t\t\t\t<projetodata:hasValue>' + result.value + '</projetodata:hasValue>\n'
+                      xmlrdf += '\t\t\t\t<projetodata:hasUnit>' + result.unit + '</projetodata:hasUnit>\n'
+                      xmlrdf += '\t\t\t\t<projetodata:hasCoordinates>' + [result.coordinates.latitude, result.coordinates.longitude]  + '</projetodata:hasCoordinates>\n'
+                      xmlrdf += '\t\t\t</projetodata:City>\n'
+                    });
+                  xmlrdf += '\t<projetodata:AirQuality>\n'
+
+                res.set('Content-Type', 'application/xml');
+                res.send(xmlrdf);
+              }
               })
       });
-
-    //let url = "https://api.openaq.org/v1/measurements";
-    /*
-    fetch(url)
-    .then(res => {
-      if(res.ok){
-        res.json();
-        console.log("success");
-      }else {
-        console.log('erreur de response', res.statusText)}
-      })
-    .then(json => {
-        res.format({
-            'text/html': function () {
-            res.send("data fetched look your console");
-            },
-            'application/json': function () {
-                res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
-                res.set('Content-Type', 'application/json');
-                res.json(json);
-              }
-            });
-            console.log("fetchair", json);
-
-    }); */
-})
+    })
 
 
 
@@ -115,7 +112,7 @@ app.get("/pays", function(req, res) {
 
 
 // API Covid start date
-app.get("/covid/:country/:start", cors(corsOptions), function(req, res) {
+app.get("/covid/:country/:start/:format?", cors(corsOptions), function(req, res) {
   let country_name =  countries.getAlpha3Code(req.param("country"), "en");
   let date_start = req.param("start");
   let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country_name+"/"+date_start;
@@ -124,7 +121,7 @@ app.get("/covid/:country/:start", cors(corsOptions), function(req, res) {
     .then(res => res.json())
     .then(json => {
       //console.log("covid", json);
-      res.format({
+      req.negotiate(req.params.format,{
             /*'text/html': function () {
             res.send("data fetched look your console");
           },*/
@@ -139,28 +136,57 @@ app.get("/covid/:country/:start", cors(corsOptions), function(req, res) {
 
 
 
-app.get("/covidinfo/enddate/:country/:end", cors(corsOptions), function(req, res) {
+app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function(req, res) {
   let country_name =  countries.getAlpha3Code(req.param("country"), "en");
   let date_end = req.param("end");
   let url = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+country_name+"/"+date_end;
   fetch(url)
-    .then(res => res.json())
-    .then(json => {
+  .then(function(response) {
+    response.json()
+      .then(function(data) {
       //console.log("covid end", json);
-      res.format({
-            /*'text/html': function () {
-            res.send("data fetched look your console");
-          },*/
+      req.negotiate(req.params.format,{
+
             'application/json': function () {
                 //res.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
                 res.set('Content-Type', 'application/json');
-                res.json(json);
-              }
+                res.json(data);
+              },
+              'application/xml':function() {
+                res.setHeader("Content-disposition", "attachement; filename = covidinfo.rdf ")
+                var xmlrdf = `<?xml version="1.0"?>\n`
+                xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+                xmlrdf += '\t<projetodata:CovidInfo>\n'
+                xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
+                xmlrdf += '\t\t<projetodata:hasDate>' + date_end + '</projetoD:hasDate>\n'
+                xmlrdf += '\t\t<projetodata:hasConfimed>' + data.stringencyData.confirmed + '</projetoD:hasConfimed>\n'
+                xmlrdf += '\t\t<projetodata:hasDeaths>' + data.stringencyData.deaths + '</projetoD:hasDeath>\n'
+                xmlrdf += '\t\t<projetodata:hasStringency>' + data.stringencyData.stringency + '</projetoD:hasStringency>\n'
+
+                xmlrdf += '\t\t\t<projetodata:hasActions>\n'
+
+                data.policyActions.forEach(function(result){
+                  xmlrdf += '\t\t\t<projetodata:hasPolicy>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:hasPolicy>' + result.policy_type_display + '</projetodata:hasPolicy>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:hasNotes>' + result.notes + '</projetodata:hasConfimed>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:hasField>' + result.flag_value_display_field + '</projetodata:hasDeath>\n'
+                  xmlrdf += '\t\t\t\t<projetodata:isFlagged>' + result.flagged + '</projetodata:hasStringency>\n'
+                  xmlrdf += '\t\t\t</projetodata:hasPolicy>\n'
+                  })
+                  xmlrdf += '\t\t\t</projetodata:hasActions>\n'
+
+
+                xmlrdf += '\t<projetodata:CovidInfo>\n'
+
+              res.set('Content-Type', 'application/xml');
+              res.send(xmlrdf);
+            }
             })
-    });
+    })
+  });
 })
 
-app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res) {
+app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(req, res) {
   //var date = null;
   //var country_name = null;
   let country_name = req.param("country");
@@ -179,7 +205,7 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
       .then(function(data) {
         results_fetch.Country = country_name ;
         results_fetch.Date = date ;
-        //results_fetch.Geo = geo_2code[0].geo;
+        results_fetch.Geo = geo_2code[0].geo;
         let AirQualityMeasure = [];
         let results = data.results;
 
@@ -245,15 +271,15 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
                 xmlrdf += '\t\t<projetodata:hasAirQualityMesure>\n'
                 xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                 xmlrdf += '\t\t<projetodata:hasDate>' + date + '</projetoD:hasDate>\n'
-              //  xmlrdf += '\t\t\t<projetodata:hasGeo>'+ geo_2code[0].geo +'</projetodata:hasGeo>\n';
+                xmlrdf += '\t\t\t<projetodata:hasGeo>'+ [geo_2code[0].geo.latitude, geo_2code[0].geo.longitude] +'</projetodata:hasGeo>\n';
 
                 results_fetch.AirqualityMeasure.forEach(function(result){
                     xmlrdf += '\t\t\t<projetodata:City>\n'
                     xmlrdf += '\t\t\t<projetodata:City>' +result.City +'</projetodata:City>\n'
-                    xmlrdf += '\t\t\t\t<projetodata:hasParameter>' + result.Parameter + '</projetodata:hasName>\n'
-                    xmlrdf += '\t\t\t\t<projetodata:hasDate>' + result.Value + '</projetodata:hasName>\n'
-                    xmlrdf += '\t\t\t\t<projetodata:hasName>' + result.Units + '</projetodata:hasName>\n'
-                    xmlrdf += '\t\t\t\t<projetodata:hasName>' + result.Coordinates + '</projetodata:hasName>\n'
+                    xmlrdf += '\t\t\t\t<projetodata:hasParameter>' + result.Parameter + '</projetodata:hasParameter>\n'
+                    xmlrdf += '\t\t\t\t<projetodata:hasValue>' + result.Value + '</projetodata:hasValue>\n'
+                    xmlrdf += '\t\t\t\t<projetodata:hasUnits>' + result.Unit + '</projetodata:hasUnits>\n'
+                    xmlrdf += '\t\t\t\t<projetodata:hasCoordinate>' + [result.Coordinates.latitude, result.Coordinates.longitude]  + '</projetodata:hasCoordinate>\n'
                     xmlrdf += '\t\t\t</projetodata:City>\n'
                   });
               xmlrdf += '\t\t</projetodata:hasAirQualityMesure>\n'
@@ -293,7 +319,7 @@ app.get("/CovidAirQuality/:country/:date", cors(corsOptions), function(req, res)
   //res.send(results_fetch);
 
 
-app.get("/test", function(req, res) {
+app.get("/Schema_RDF", function(req, res) {
 
   req.negotiate({
     "application/xml" : function() {
