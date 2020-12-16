@@ -8,7 +8,7 @@
 - SECK Omar 
 
 ## Air quality and lockdowns site :
-- Liens heroku : https://projetodata.herokuapp.com/
+- Lien heroku : https://projetodata.herokuapp.com/
 
 ## Air quality and lockdowns API :
 
