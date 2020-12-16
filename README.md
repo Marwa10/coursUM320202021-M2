@@ -14,29 +14,29 @@
 
 - Requête source 1:
 
-         - Exemple : https://projetodata.herokuapp.com/airquality/COUNTRY/YYYY-MM-DD/YYYY-MM-DD/FORMAT
+          Exemple : https://projetodata.herokuapp.com/airquality/COUNTRY/YYYY-MM-DD/YYYY-MM-DD/FORMAT
 
-         - json : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/json
+    json : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/json
          
-         - xml : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/xml
+     xml : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/xml
 
 
 - Requête source 2:
 
-         - Exemple: https://projetodata.herokuapp.com/covidinfo/enddate/COUNTRY/YYYY-MM-DD/FORMAT
+          Exemple: https://projetodata.herokuapp.com/covidinfo/enddate/COUNTRY/YYYY-MM-DD/FORMAT
 
-         - json: https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//json
+    - json: https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//json
          
-         - xml : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//xml
+    - xml : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//xml
 
 
 -Requête qui combine source 1 et 2 :
 
-         - Exemple: https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/FORMAT
+          Exemple: https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/FORMAT
 
-         - json : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-06-04/json
+   json : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-06-04/json
          
-         - xml : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-06-04/xml
+   xml : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-06-04/xml
 
 ## Sources de données : 
 
