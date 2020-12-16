@@ -16,7 +16,8 @@
 
          Exemple : https://projetodata.herokuapp.com/airquality/COUNTRY/YYYY-MM-DD/YYYY-MM-DD/FORMAT
 
- json : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/json      
+ json : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/json 
+ 
  xml : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/xml
 
 
@@ -25,6 +26,7 @@
          Exemple: https://projetodata.herokuapp.com/covidinfo/enddate/COUNTRY/YYYY-MM-DD/FORMAT
 
  json: https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//json
+ 
  xml : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//xml
 
 
