@@ -12,7 +12,7 @@
 
 ## Air quality and lockdowns API :
 
-- Requete source 1:
+- Requête source 1:
 
          - json : https://projetodata.herokuapp.com/airquality/COUNTRY/start-date/end-date/json
 
@@ -23,7 +23,7 @@
         Exemple : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/xml
 
 
-- Requete source 2:
+- Requête source 2:
 
          - json : https://projetodata.herokuapp.com/covidinfo/enddate/country/date/json
 
@@ -34,7 +34,7 @@
         Exemple : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//xml
 
 
--Requete qui combine source 1 et 2 :
+-Requête qui combine source 1 et 2 :
 
          - json : https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/json
 
