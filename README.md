@@ -23,7 +23,7 @@
 
 - Requête source 2:
 
-         - Exemple: https://projetodata.herokuapp.com/covidinfo/enddate/country/YYYY-MM-DD/FORMAT
+         - Exemple: https://projetodata.herokuapp.com/covidinfo/enddate/COUNTRY/YYYY-MM-DD/FORMAT
 
          - json: https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//json
          
