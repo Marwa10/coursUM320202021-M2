@@ -14,22 +14,22 @@
 
 - Requête source 1:
 
-         - json : https://projetodata.herokuapp.com/airquality/COUNTRY/start-date/end-date/json
+         - json : https://projetodata.herokuapp.com/airquality/COUNTRY/YYYY-MM-DD/YYYY-MM-DD/json
 
          Exemple : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/json
          
-         - xml : https://projetodata.herokuapp.com/airquality/COUNTRY/start-date/end-date/xml
+         - xml : https://projetodata.herokuapp.com/airquality/COUNTRY/YYYY-MM-DD/YYYY-MM-DD/xml
 
         Exemple : https://projetodata.herokuapp.com/airquality/FRANCE/2020-08-08/2020-08-08/xml
 
 
 - Requête source 2:
 
-         - json : https://projetodata.herokuapp.com/covidinfo/enddate/country/date/json
+         - json : https://projetodata.herokuapp.com/covidinfo/enddate/country/YYYY-MM-DD/json
 
          Exemple : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//json
          
-         - xml : https://projetodata.herokuapp.com/covidinfo/enddate/country/date/json
+         - xml : https://projetodata.herokuapp.com/covidinfo/enddate/country/YYYY-MM-DD/json
 
         Exemple : https://projetodata.herokuapp.com/covidinfo/enddate/FRANCE/2020-06-04//xml
 
