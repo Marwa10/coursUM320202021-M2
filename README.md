@@ -12,8 +12,11 @@
 
 ## Air quality and lockdowns API :
 - json : https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/json
+
          Exemple : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-03-04/json
+         
 - xml : https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/xml
+
         Exemple : https://projetodata.herokuapp.com/covidAirquality/FRANCE/2020-03-04/xml
 
 ## Sources de données : 
