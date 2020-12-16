@@ -46,7 +46,7 @@
 
 ## Sources de données : 
 
-Pour réaliser 
+
 Nos API proviennent de  : 
 - https://docs.openaq.org 
 - https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker
@@ -78,5 +78,9 @@ Au vu de l'actualité, nous voulions, à travers les multitudes effets de la pan
 Les deux API possèdent chacune une combinaison de clés date/pays qui permettent une correspondance parfaite pour pouvoir être lié. C'est ainsi que nous avons pu ensuite reconstruire une structure adaptée à l'objectif de notre API
 
 ## Méthodes utilisés : 
+
+- Libraire leaflet pour la cartographie.
+- librairie i18n-iso-countries https://www.npmjs.com/package/i18n-iso-countries: pour avoir le code d'un pays
+- template du site est fournie par https://colorlib.com
 
 
