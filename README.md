@@ -9,6 +9,7 @@
 
 ## Air quality and lockdowns site :
 - Lien heroku : https://projetodata.herokuapp.com/
+- Lien githubpage : https://marwa10.github.io/projetodata/
 
 ## Air quality and lockdowns API :
 
@@ -45,7 +46,6 @@ Nos API proviennent de  :
 - https://docs.openaq.org 
 - https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker
 
-BD pour alimenter la liste déroulante : https://www.nationsonline.org/oneworld/country_code_list.htm
 
 Nous avons selectionné 2 API portants sur le secteur environnementale et épidémiologique.
 
