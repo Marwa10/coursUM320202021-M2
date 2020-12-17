@@ -6,7 +6,7 @@
 
 <!-- Table covid_air_quality -->
 
-<rdfs:Class rdf:about=":domaine:/rdfvocabulary#covid_air_quality">
+<rdfs:Class rdf:about=":https://projetodata.herokuapp.com/airquality/rdfvocabulary#covid_air_quality">
   <rdfs:label xml:lang ='fr'>covid_air_quality</rdfs:label>
   <rdfs:comment xml:lang ='fr'> Les information du covid et la mesure de la qualité de l'aire </rdfs:comment>
 <rdfs:Class/>
@@ -48,7 +48,7 @@
 
 <!-- Relation et propirété dans la table Covid Air_quality -->
 
-<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasAir_quality_mesure"
+<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasAir_quality_mesure"
               rdfs:label="hasAir_quality_mesure"
               rdfs:comment="La mesure de la qualité de l'aire">
     <rdfs:domain rdf:resource="#covid_air_quality"/>
@@ -56,7 +56,7 @@
     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
  </rdf:Property>
 
- <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCovidInfo"
+ <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasCovidInfo"
                rdfs:label="hasCovidInfo"
                rdfs:comment="Les infos de la covid">
      <rdfs:domain rdf:resource="#covid_info"/>
@@ -64,7 +64,7 @@
      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
   </rdf:Property>
 
- <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+ <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasDate"
                rdfs:label="hasDate"
                rdfs:comment="La date">
      <rdfs:domain rdf:resource="#covid_air_quality"/>
@@ -72,7 +72,7 @@
      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
   </rdf:Property>
 
-  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPays" rdfs:label="hasPays"
+  <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasPays" rdfs:label="hasPays"
   rdfs:comment="Le pays">
       <rdfs:domain rdf:resource="#covid_air_quality"/>
       <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -83,7 +83,7 @@
 
 <!-- Relation et propirété dans la table Air quality Measure -->
 
-<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+<rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasDate"
               rdfs:label="hasDate"
               rdfs:comment="La Date">
     <rdfs:domain rdf:resource="#Air_quality_measure"/>
@@ -91,7 +91,7 @@
     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
  </rdf:Property>
 
- <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasParameter"
+ <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasParameter"
                rdfs:label="hasParameter"
                rdfs:comment="Les paramètre de la mesure de la qualité de l'aire">
      <rdfs:domain rdf:resource="#Air_quality_measure"/>
@@ -99,7 +99,7 @@
      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
   </rdf:Property>
 
-  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCity"
+  <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasCity"
                 rdfs:label="hasCity"
                 rdfs:comment="La ville">
       <rdfs:domain rdf:resource="#Air_quality_measure"/>
@@ -107,7 +107,7 @@
       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
    </rdf:Property>
 
-   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasValue"
+   <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasValue"
                  rdfs:label="hasValue"
                  rdfs:comment="La valeur de la qualité de l'aire">
        <rdfs:domain rdf:resource="#Air_quality_measure"/>
@@ -115,7 +115,7 @@
        <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
     </rdf:Property>
 
-    <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasUnit"
+    <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasUnit"
                   rdfs:label="hasUnit"
                   rdfs:comment="L'unité de mesure de la qualité de l'aire">
         <rdfs:domain rdf:resource="#Air_quality_measure"/>
@@ -123,7 +123,7 @@
         <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
      </rdf:Property>
 
-     <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCoordinate"
+     <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasCoordinate"
                    rdfs:label="hasCoordinate"
                    rdfs:comment="Latitude et longitude de la ville">
          <rdfs:domain rdf:resource="#Coordinates"/>
@@ -133,7 +133,7 @@
 
 <!-- Relation et propirété dans la table Coordinates -->
 
-<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasLatitude"
+<rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasLatitude"
               rdfs:label="hasLatitude"
               rdfs:comment="Latitude de la ville">
     <rdfs:domain rdf:resource="#Coordinates"/>
@@ -141,7 +141,7 @@
     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
  </rdf:Property>
 
- <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasLongitude"
+ <rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasLongitude"
                rdfs:label="hasLongitude"
                rdfs:comment="Latitude de la ville">
      <rdfs:domain rdf:resource="#Coordinates"/>
@@ -151,7 +151,7 @@
 
   <!-- Relation et propirété dans la table Covid Infos-->
 
-  <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+  <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasStringency"
                 rdfs:label="hasStringency"
                 rdfs:comment="Les infos d ela covid">
       <rdfs:domain rdf:resource="#covid_info"/>
@@ -159,7 +159,7 @@
       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
    </rdf:Property>
 
-   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasActions"
+   <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasActions"
                  rdfs:label="hasActions"
                  rdfs:comment="Les actions liées à la covid">
        <rdfs:domain rdf:resource="#covid_info"/>
@@ -169,7 +169,7 @@
 
     <!--Relation et propirété dans la table Stringency -->
 
-    <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasConfirmed"
+    <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasConfirmed"
                   rdfs:label="hasConfirmed"
                   rdfs:comment="Le nombre de cas de covid confirmé">
         <rdfs:domain rdf:resource="#stringency"/>
@@ -177,7 +177,7 @@
         <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
      </rdf:Property>
 
-     <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDeath"
+     <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasDeath"
                    rdfs:label="hasDeath"
                    rdfs:comment="Lee nombre de décés lié à la covid">
          <rdfs:domain rdf:resource="#stringency"/>
@@ -185,7 +185,7 @@
          <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
       </rdf:Property>
 
-      <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+      <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasStringency"
                     rdfs:label="hasStringency"
                     rdfs:comment="La rigeur des mesures prises">
           <rdfs:domain rdf:resource="#covid_info"/>
@@ -194,7 +194,7 @@
        </rdf:Property>
 <!-- Relation et propirété dans la table Actions -->
 
-<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasNotes"
+<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasNotes"
               rdfs:label="hasNotes"
               rdfs:comment="Les commentaire de l'agent">
     <rdfs:domain rdf:resource="#Actions"/>
@@ -202,7 +202,7 @@
     <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
  </rdf:Property>
 
- <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPolicy"
+ <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasPolicy"
                rdfs:label="hasPolicy"
                rdfs:comment="La police">
      <rdfs:domain rdf:resource="#Actions"/>
@@ -210,7 +210,7 @@
      <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
   </rdf:Property>
 
-  <rdf:Property rdf:about=":domaine:/rdfvocabulary#isFlagged"
+  <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#isFlagged"
                 rdfs:label="isFlagged"
                 rdfs:comment="existe">
       <rdfs:domain rdf:resource="#Actions"/>
@@ -218,7 +218,7 @@
       <rdfs:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>
    </rdf:Property>
 
-   <rdf:Property rdf:about=":domaine:/rdfvocabulary#hasField"
+   <rdf:Property rdf:about="https://projetodata.herokuapp.com/covidinfo/enddate/rdfvocabulary#hasField"
                  rdfs:label="hasField"
                  rdfs:comment="Le département de la police">
        <rdfs:domain rdf:resource="#Actions"/>

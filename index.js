@@ -328,8 +328,8 @@ app.get("/Schema_RDF", function(req, res) {
     "application/xml" : function() {
       res.setHeader("Content-disposition", "attachement; filename=test.rdf")
       var xmlrdf = `<?xml version="1.0"?>\n`
-      xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
-      xmlrdf += `<projetodata:Class rdf:about=":domaine:/rdfvocabulary#covid_air_quality">\n`
+      xmlrdf += `<rdf:RDF xmlns:projetodata = "https://projetodata.herokuapp.com/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+      xmlrdf += `<projetodata:Class rdf:about="https://projetodata.herokuapp.com/covidAirqualityAirQuality/rdfvocabulary#covid_air_quality">\n`
       xmlrdf += `<projetodata:label xml:lang ="fr">covid_air_quality</projetodata:label>`
       xmlrdf += `<projetodata:comment xml:lang ="fr"> Les information du covid et la mesure de la qualité de l'aire </projetodata:comment>\n`
       xmlrdf += `<projetodata:Class/>\n`
@@ -356,7 +356,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:comment xml:lang ='fr'> Les coordonnées geographique de la ville  </projetodata:comment>\n`
       xmlrdf += `<projetodata:Class/>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasAir_quality_mesure"
+      xmlrdf += `<rdf:Property rdf:about=":https://projetodata.herokuapp.com/AirQuality/:/rdfvocabulary#hasAir_quality_mesure"
       \n projetodata:label="hasAir_quality_mesure"
       \n projetodata:comment="La mesure de la qualité de l'aire">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_air_quality"/>\n`
@@ -364,15 +364,15 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCovidInfo"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/CovidInfo/rdfvocabulary#hasCovidInfo"
       \n projetodata:label="hasCovidInfo"
       \n projetodata:comment="Les infos de la covid">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_info"/>\n`
       xmlrdf += `<projetodata:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
+      xmlrdf += `<projetodata:isDefinedBy rdf:resource="https://projetodata.herokuapp.com/CovidInfo/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasDate"
       \n projetodata:label="hasDate"
       \n projetodata:comment="La date">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_air_quality"/>\n`
@@ -380,7 +380,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPays"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasPays"
       \n projetodata:label="hasPays"
       \n projetodata:comment="Le pays">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_air_quality"/>\n`
@@ -388,7 +388,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasDate"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasDate"
       \n projetodata:label="hasDate"
       \n projetodata:comment="La Date">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Air_quality_measure"/>\n`
@@ -396,7 +396,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasParameter"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasParameter"
       \n projetodata:label="hasParameter"
       \n projetodata:comment="Les paramètre de la mesure de la qualité de l'aire">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Air_quality_measure"/>\n`
@@ -404,7 +404,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `rdf:about=":domaine:/rdfvocabulary#hasCity"
+      xmlrdf += `rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasCity"
       \n projetodata:label="hasCity"
       \n projetodata:comment="La ville">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Air_quality_measure"/>\n`
@@ -412,7 +412,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasValue"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/airquality/rdfvocabulary#hasValue"
       \n projetodata:label="hasValue"
       \n projetodata:comment="La valeur de la qualité de l'aire">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Air_quality_measure"/>\n`
@@ -420,7 +420,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasUnit"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasUnit"
       \n projetodata:label="hasUnit"
       \n projetodata:comment="L'unité de mesure de la qualité de l'aire">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Air_quality_measure"/>\n`
@@ -428,7 +428,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasCoordinate"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/AirQuality/rdfvocabulary#hasCoordinate"
       \n projetodata:label="hasCoordinate"
       \n projetodata:comment="Latitude et longitude de la ville">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Coordinates"/>\n`
@@ -436,7 +436,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasLatitude"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasLatitude"
       \n projetodata:label="hasLatitude"
       \n projetodata:comment="Latitude de la ville">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Coordinates"/>\n`
@@ -444,7 +444,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasStringency"
       \n projetodata:label="hasStringency"
       \n projetodata:comment="Les infos de la covid-19">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_info"/>\n`
@@ -452,7 +452,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasActions"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasActions"
       \n projetodata:label="hasActions"
       \n projetodata:comment="Les actions liées à la covid">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_info"/>\n`
@@ -460,7 +460,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasConfirmed"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasConfirmed"
       \n projetodata:label="hasConfirmed"
       \n projetodata:comment="Le nombre de cas de covid confirmé">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#stringency"/>\n`
@@ -476,7 +476,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasStringency"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasStringency"
       \n projetodata:label="hasStringency"
       \n projetodata:comment="La rigeur des mesures prises">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#covid_info"/>\n`
@@ -484,7 +484,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasNotes"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasNotes"
       \n projetodata:label="hasNotes"
       \n projetodata:comment="Les commentaire de l'agent">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Actions"/>\n`
@@ -492,7 +492,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasPolicy"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasPolicy"
       \n projetodata:label="hasPolicy"
       \n projetodata:comment="La police">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Actions"/>\n`
@@ -500,7 +500,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#isFlagged"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#isFlagged"
       \n projetodata:label="isFlagged"
       \n projetodata:comment="existe">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Actions"/>\n`
@@ -508,7 +508,7 @@ app.get("/Schema_RDF", function(req, res) {
       xmlrdf += `<projetodata:isDefinedBy rdf:resource=":domaine:/rdfvocabulary"/>\n`
       xmlrdf += `</rdf:Property>\n`
 
-      xmlrdf += `<rdf:Property rdf:about=":domaine:/rdfvocabulary#hasField"
+      xmlrdf += `<rdf:Property rdf:about="https://projetodata.herokuapp.com/covidAirquality/rdfvocabulary#hasField"
       \n projetodata:label="hasField"
       \n projetodata:comment="Le département de la police">\n`
       xmlrdf += `<projetodata:domain rdf:resource="#Actions"/>\n`
