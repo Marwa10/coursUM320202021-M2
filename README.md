@@ -52,12 +52,12 @@ Nous avons selectionné 2 API portants sur le secteur environnementale et épid�
 ### Open AQ
 Alimentée et entretenue par une communauté de chercheurs et professionnels de l'environnement, cette API
 regroupe des données de qualité d'air à travers le monde entier. Nous avons la possibilité de récupérer des informations pour un ou plusieurs pays. 
-Les paramètres utilisés pour effectuer la requête sont le nom du pays et la date d'enregistrement , cela permet de récupérer un ensemble d'informations sur les pays (Nom, Valeur, Mesure, Ville...)
+Les paramètres utilisés pour effectuer la requête sont le nom du pays et la date d'enregistrement , cela permet de récupérer un ensemble d'informations sur les pays (Nom, Valeur, Mesure, Ville...).
 
 Lien: https://docs.openaq.org
 
 ### The Oxford COVID-19 Government Response Tracker
-Cette API est proposée par l'université d'Oxford, elle permet d'avoir accès aux données de décisions gouvernementales associées à la situation sanitaire dépendamment de l'évolution national de la Covid-19. Nous pouvons donc, comme dans l'API précédent, sélectionner un pays ou plusieurs pays avec une date ou un intervalle de temps. Les paramètres que nous avons utilisé sont nom du pays et la date.
+Cette API est proposée par l'université d'Oxford, elle permet d'avoir accès aux données relatives aux décisions gouvernementales et aux situations sanitaires liés à la progression du Covid-19. Nous pouvons donc, comme dans l'API précédente, sélectionner un pays ou plusieurs pays avec une date ou un intervalle de temps. Les paramètres que nous avons utilisés sont le nom du pays et la date.
 
 Lien: https://covidtracker.bsg.ox.ac.uk/about-api
 
@@ -66,10 +66,10 @@ Nous n'affichons pas l'ensemble des résultats que nous renvoient les API. En ef
 ## Choix des sources de données :
 
 ### Objectif
-Au vu de l'actualité, nous voulions, à travers les multitudes effets de la pandémie du covid-19, avoir un aperçu d'un lien potentiel entre les décisions gouvernementales menées en parallèles des situations sanitaires et une amélioration éventuelle de l'atmosphère mondial. Est-ce que des mesures de restrictions à plusieurs degrés mènent à un changement significatif de la qualité de l'air? C'est pourquoi nous proposons de faire ce croisement d'API afin de permettre des possibilité d'analyses de causes et effet
+Au vu de l'actualité, nous voulions, à travers les multitudes effets de la pandémie du covid-19, avoir un aperçu d'un lien potentiel entre les décisions gouvernementales menées à dépendantes des situations sanitaires et une amélioration éventuelle de l'atmosphère mondial. Est-ce que des mesures de restrictions à plusieurs natures mènent à un changement significatif de la qualité de l'air ? C'est pourquoi nous proposons de faire ce croisement d'API afin de permettre des possibilités d'analyses de causes et effet.
 
 ### Pertinence
-Les deux API possèdent chacune une combinaison de clés date/pays qui permettent une correspondance parfaite pour pouvoir être lié. C'est ainsi que nous avons pu ensuite reconstruire une structure adaptée à l'objectif de notre API
+Les deux API possèdent chacune une combinaison de clés date/pays qui permettent une correspondance parfaite pour pouvoir être liées. C'est ainsi que nous avons pu, par la suite, reconstruire une structure adaptée à l'objectif de notre API
 
 ## Méthodes utilisés : 
 
