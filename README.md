@@ -9,7 +9,6 @@
 
 ## Air quality and lockdowns site :
 - Lien heroku : https://projetodata.herokuapp.com/
-- Lien githubpage : https://marwa10.github.io/projetodata/
 
 ## Air quality and lockdowns API :
 
