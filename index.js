@@ -80,7 +80,7 @@ async function initialize(){
                 'application/xml':function() {
                   res.setHeader("Content-disposition", "attachement; filename = Airquality.rdf ")
                   var xmlrdf = `<?xml version="1.0"?>\n`
-                  xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+                  xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/" xmlns:projetodata = "https://projetodata.herokuapp.com/airquality">\n`
                   xmlrdf += '\t<projetodata:AirQuality>\n'
                   xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                   xmlrdf += '\t\t<projetodata:hasDate>' + d_to + '</projetoD:hasDate>\n'
@@ -152,7 +152,7 @@ app.get("/covidinfo/enddate/:country/:end/:format?", cors(corsOptions), function
               'application/xml':function() {
                 res.setHeader("Content-disposition", "attachement; filename = covidinfo.rdf ")
                 var xmlrdf = `<?xml version="1.0"?>\n`
-                xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+                xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/" xmlns:projetodata = "https://projetodata.herokuapp.com/CovidInfo">\n`
                 xmlrdf += '\t<projetodata:CovidInfo>\n'
                 xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
                 xmlrdf += '\t\t<projetodata:hasDate>' + date_end + '</projetoD:hasDate>\n'
@@ -264,7 +264,7 @@ app.get("/CovidAirQuality/:country/:date/:format?", cors(corsOptions), function(
               'application/xml':function() {
                 res.setHeader("Content-disposition", "attachement; filename = CovidAirQuality.rdf ")
                 var xmlrdf = `<?xml version="1.0"?>\n`
-                xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
+                xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/" xmlns:projetodata = "https://projetodata.herokuapp.com/covidAirquality">\n`
                 xmlrdf += '\t<projetodata:CovidAirQuality>\n'
 
                 xmlrdf += '\t\t<projetodata:hasCountry>' + country_name + '</projetoD:hasCountry>\n'
